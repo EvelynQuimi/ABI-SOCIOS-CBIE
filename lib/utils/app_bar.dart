@@ -1,9 +1,13 @@
 import 'package:app_socios/src/view/inside/Home/Notificaciones/Notificaciones.dart';
-import 'package:app_socios/src/view/inside/Home/publicar.dart';
+import 'package:app_socios/src/view/inside/Home/Publicar.dart';
 import 'package:flutter/material.dart';
+import 'package:insta_assets_picker/insta_assets_picker.dart';
 import 'package:path/path.dart';
+import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
-class MyAppBar {
+import '../src/view/inside/Home/crop_result_view.dart';
+
+class MyAppBar extends Widget with InstaPickerInterface {
   GlobalKey<ScaffoldState> key;
 
   MyAppBar({required this.key});
@@ -61,7 +65,7 @@ class MyAppBar {
           leading: IconButton(
             icon: const Icon(
               Icons.menu,
-              color: Colors.black,
+              color: Colors.grey,
               size: 30,
             ),
             onPressed: () => key.currentState!.openDrawer(),
@@ -70,14 +74,19 @@ class MyAppBar {
             IconButton(
                 icon: const Icon(
                   Icons.add, //Icono de subir post
-                  size: 30,
+                  size: 30, color: Colors.grey,
                 ),
-                onPressed: () {}),
+                onPressed: () => metodo(
+                    context) /*Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (builder) => PickerDescription(context)))*/
+                ),
             IconButton(
                 icon: const Icon(
-                  Icons.notifications_none, //icono de notificaciones
-                  size: 30,
-                ),
+                    Icons.notifications_none, //icono de notificaciones
+                    size: 30,
+                    color: Colors.grey),
                 onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -88,4 +97,93 @@ class MyAppBar {
           snap: false,
           bottom: PreferredSize(
               preferredSize: const Size.fromHeight(20), child: widgethide));
+
+  Future<void> _pickFromWeChatCamera(BuildContext context) async {
+    Feedback.forTap(context);
+    final AssetEntity? entity = await CameraPicker.pickFromCamera(
+      context,
+      locale: Localizations.maybeLocaleOf(context),
+      pickerConfig: CameraPickerConfig(
+        theme: Theme.of(context),
+        resolutionPreset: cameraResolutionPreset,
+        // to allow video recording
+        enableRecording: true,
+      ),
+    );
+    if (entity == null) return;
+
+    if (context.mounted) {
+      await InstaAssetPicker.refreshAndSelectEntity(context, entity);
+    }
+  }
+
+  void metodo(context) => InstaAssetPicker.pickAssets(
+        context,
+        pickerConfig: InstaAssetPickerConfig(
+          title: "Nueva Publicación",
+          pickerTheme: getPickerTheme(context),
+          actionsBuilder: (
+            BuildContext context,
+            ThemeData? pickerTheme,
+            double height,
+            VoidCallback unselectAll,
+          ) =>
+              [
+            InstaPickerCircleIconButton.unselectAll(
+              onTap: unselectAll,
+              theme: pickerTheme,
+              size: height,
+            ),
+            const SizedBox(width: 8),
+            InstaPickerCircleIconButton(
+              onTap: () => _pickFromWeChatCamera(context),
+              theme: pickerTheme,
+              icon: const Icon(Icons.camera_alt),
+              size: height,
+            ),
+          ],
+          specialItemBuilder: (context, _, __) {
+            // return a button that open the camera
+            return ElevatedButton(
+              onPressed: () => _pickFromWeChatCamera(context),
+              style: ElevatedButton.styleFrom(
+                shape: const RoundedRectangleBorder(),
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.transparent,
+              ),
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: Text(
+                  InstaAssetPicker.defaultTextDelegate(context)
+                      .sActionUseCameraHint,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          },
+          // since the list is revert, use prepend to be at the top
+          specialItemPosition: SpecialItemPosition.prepend,
+        ), //Numero permitido de fotos a publicar
+        maxAssets: 10,
+
+        onCompleted: (cropStream) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  PickerCropResultScreen(cropStream: cropStream),
+            ),
+          );
+        },
+      );
+
+  @override
+  Element createElement() {
+    // TODO: implement createElement
+    throw UnimplementedError();
+  }
+
+  @override
+  // TODO: implement description
+  PickerDescription get description => throw UnimplementedError();
 }

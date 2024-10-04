@@ -13,7 +13,7 @@ class CustomIndicatorCarouselDemo extends StatefulWidget {
 }
 
 class _CarouselWithIndicatorState extends State<CustomIndicatorCarouselDemo> {
-  final int _current = 4;
+  final int _current = 10;
 
   @override
   Widget build(BuildContext context) {

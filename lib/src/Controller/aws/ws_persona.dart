@@ -56,7 +56,7 @@ class WsPersona {
   Future<String> actualizarUsuario(PersonaModel usuario) async {
     final pfrc = UserPreferences();
 
-    final id = await pfrc.getIdPerson();
+    final id = await pfrc.getIdPersona();
 
     try {
       final user = await http.post(Uri.parse(_url),
@@ -81,7 +81,7 @@ class WsPersona {
       {required String parametro, required String dato}) async {
     final pfrc = UserPreferences();
 
-    final id = await pfrc.getIdPerson();
+    final id = await pfrc.getIdPersona();
 
     try {
       final update = await http.post(Uri.parse(_url),
@@ -121,7 +121,7 @@ class WsPersona {
         debugPrint("data: ${user.body}");
         final decode = jsonDecode(user.body);
 
-        Operaciones().crearPersona;
+        Operaciones().insertarPersona(decode);
         await pfrc.saveIdPerson(decode[0]["id_usuario"]);
         await pfrc.saveUserIdentification(decode[0]["cedula"]);
         if (decode[0]["nombres"].contains(" ")) {
@@ -140,7 +140,7 @@ class WsPersona {
         await pfrc.setUserMail(decode[0]["correo"]);
         await pfrc.savePathPhoto(decode[0]["foto"]);
 
-        if (decode[0]["id_tipo_vendedor"] != null) {
+        if (decode[0]["id_persona"] != null) {
           await apppfrc.saveAcademyPage(true);
         } else {
           await apppfrc.saveAcademyPage(false);
@@ -168,7 +168,7 @@ class WsPersona {
   Future<Map<String, dynamic>?> obtenerPerfil() async {
     try {
       final pfrc = UserPreferences();
-      final idPerson = await pfrc.getIdPerson();
+      final idPerson = await pfrc.getIdPersona();
 
       final profile = await http.post(Uri.parse(_url),
           body: jsonEncode({
@@ -180,10 +180,7 @@ class WsPersona {
         final decode = jsonDecode(profile.body);
 
         if (decode["status"] == "ok") {
-          return {
-            "id_tipo": decode["result"]["id_tipo_vendedor"],
-            "id_reg": decode["result"]["id"]
-          };
+          return {"id_reg": decode["result"]["id"]};
         } else {
           return null;
         }
@@ -196,16 +193,16 @@ class WsPersona {
     }
   }
 
-  Future<String> insertarPerfil(int idVendedor) async {
+  Future<String> insertarPerfil(int idPersona) async {
     try {
       final pfrc = UserPreferences();
       final pfrcApp = AppPreferences();
-      final getId = await pfrc.getIdPerson();
+      final getId = await pfrc.getIdPersona();
 
       final user = await http.post(Uri.parse(_url),
           body: jsonEncode({
             "operacion": "insert-profile",
-            "info": {"id_vendedor": idVendedor, "id_usuario": getId}
+            "info": {"id_persona": idPersona, "id_usuario": getId}
           }));
 
       if (user.statusCode > 199 && user.statusCode < 300) {
@@ -220,17 +217,17 @@ class WsPersona {
     }
   }
 
-  Future<String> actualizarPerfil(int idVendedor, int idReg) async {
+  Future<String> actualizarPerfil(int idPersona, int idReg) async {
     try {
       final pfrc = UserPreferences();
-      final id = await pfrc.getIdPerson();
+      final id = await pfrc.getIdPersona();
 
       final profile = await http.post(Uri.parse(_url),
           body: jsonEncode({
             "operacion": "update-profile",
             "info": {
               "id_usuario": id,
-              "id_vendedor": idVendedor,
+              "id_persona": idPersona,
               "id_registro": idReg
             }
           }));
@@ -250,12 +247,12 @@ class WsPersona {
 
     try {
       final pfrc = UserPreferences();
-      final getId = await pfrc.getIdPerson();
+      final getId = await pfrc.getIdPersona();
 
       final user = await http.post(Uri.parse(_url),
           body: jsonEncode({
             "operacion": "get",
-            "info": {"id_usuario": getId}
+            "info": {"id_socio": getId}
           }));
 
       if (user.statusCode > 199 && user.statusCode < 300) {
@@ -278,10 +275,10 @@ class WsPersona {
 
 extension on UserPreferences {
   setFullName(String s) {}
-  
+
   setUserName(decode) {}
-  
+
   setUserLastName(decode) {}
-  
+
   setUserMail(decode) {}
 }

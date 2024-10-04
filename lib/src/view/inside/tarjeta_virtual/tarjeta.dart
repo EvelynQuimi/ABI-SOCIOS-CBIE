@@ -36,9 +36,16 @@ class _Tarjeta_vState extends State<Tarjeta_v> with TickerProviderStateMixin {
                 widgethide: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.card_giftcard),
+                    Icon(
+                      Icons.card_giftcard,
+                      color: Colors.grey,
+                    ),
                     SizedBox(width: 5),
-                    Text("Mi Tarjeta Virtual")
+                    Text("Mi Tarjeta Virtual",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.grey))
                   ],
                 ))
           ];

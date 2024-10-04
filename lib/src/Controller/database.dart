@@ -102,10 +102,13 @@ class DatabaseProvider {
   static const String valor = "valor";
   static const String banner_evento = "banner_evento";
   static const String estado_evento = "estado_evento";
+
 // todo VARIABLES publicacion
   static const String id_publicacion = "id_publicacion";
   static const String estado_publicacion = "estado_publicacion";
   static const String descripcion_publicacion = "descripcion_publicacion";
+  static const String hora_publicacion = "hora_publicacion";
+  static const String fecha_publicacion = "fecha_publicacion";
 
 //todo VARIABLES fotos publicacion
   static const String id_foto = "id_foto";
@@ -226,7 +229,11 @@ class DatabaseProvider {
   $id_publicacion INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   $id_socio INTEGER,
   $estado_publicacion INTEGER,
-  $descripcion_publicacion TEXT,)""");
+  $descripcion_publicacion TEXT,
+  $fecha_publicacion INTEGER,
+  $hora_publicacion INTEGER,
+
+  )""");
 
       await db.execute("""CREATE TABLE IF NOT EXIST tbl_fotos_publicacion(
   $id_foto INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -236,6 +243,7 @@ class DatabaseProvider {
       await db.execute("""CREATE TABLE IF NOT EXIST tbl_likes(
   $id_like INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   $id_persona INTEGER,
+  $id_socio INTEGER,
   $id_publicacion INTEGER,)""");
 
       await db.execute("""CREATE TABLE IF NOT EXIST tbl_beneficio(

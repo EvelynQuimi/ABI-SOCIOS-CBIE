@@ -79,41 +79,41 @@ Drawer drawerMenu(context, {bool? inicio}) {
         ),
       );
 
-  Widget miPerfil(context) => Column(children: [
-        //todo MI PERFIL
+  Widget miPerfil(context) => Column(
+        children: [
+          /* //todo MI PERFIL
         ExpansionTile(
           title: const Text(
-            "Mi perfil",
+            "Mis Datos",
             style: TextStyle(
               fontSize: 18,
               color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
           leading: const Icon(Icons.person_2_outlined),
-          children: [
-            dividerMenuLateral(),
-            ListTile(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (builder) => MisDatos()));
-              },
-              leading: const Icon(Icons.description),
-              trailing: const Icon(
-                Icons.navigate_next_sharp,
+          children: [*/
+          dividerMenuLateral(),
+          ListTile(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (builder) => MisDatos()));
+            },
+            leading: const Icon(Icons.description),
+            /*trailing: const Icon(
+              Icons.navigate_next_sharp,
+              color: Colors.black,
+            ),*/
+            title: const Text(
+              "Mis Datos",
+              style: TextStyle(
+                fontSize: 18,
                 color: Colors.black,
               ),
-              title: Container(
-                padding: const EdgeInsets.only(left: 40),
-                child: const Text(
-                  "Datos personales",
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
             ),
-            dividerMenuLateral(),
-            /*ListTile(
+          ),
+
+          //dividerMenuLateral(),
+          /*ListTile(
               onTap: () {},
               leading: const Icon(Icons.account_box_rounded),
               trailing: const Icon(
@@ -131,7 +131,7 @@ Drawer drawerMenu(context, {bool? inicio}) {
               ),
             ),
             dividerMenuLateral(),*/
-            ListTile(
+          /*ListTile(
               onTap: () => {},
               leading: const Icon(Icons.password),
               trailing: const Icon(
@@ -147,9 +147,9 @@ Drawer drawerMenu(context, {bool? inicio}) {
                   ),
                 ),
               ),
-            ),
+            ),*/
 
-            /* dividerMenuLateral(),
+          /* dividerMenuLateral(),
             ListTile(
               onTap: () => Navigator.push(
                   context,
@@ -170,9 +170,8 @@ Drawer drawerMenu(context, {bool? inicio}) {
                 ),
               ),
             ),*/
-          ],
-        )
-      ]);
+        ],
+      );
 
   Widget terminosCondiciones(context) => Column(
         children: [
@@ -354,7 +353,7 @@ class UserPreferences {
 
   savePathPhoto(String newPath) {}
 
-  getIdPerson() {}
+  getIdPersona() {}
 
   saveIdPerson(decode) {}
 

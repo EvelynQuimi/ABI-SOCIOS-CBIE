@@ -1,7 +1,10 @@
 import 'package:app_socios/WelcomeScreen.dart';
 import 'package:app_socios/src/view/inside/Home/loginScreen.dart';
+import 'package:app_socios/src/view/inside/Home/screenlogin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+const kDefaultColor = Colors.deepPurple;
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
         fontFamily: ('inter'),
         useMaterial3: true,
       ),
-      home: const WelcomeScreen(),
+      home: const /*loginScreen LoginPage*/ screenlogin(),
     );
   }
 }

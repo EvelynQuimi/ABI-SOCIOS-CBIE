@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:io';
+/*import 'dart:io';
 
 import 'package:app_socios/utils/alerts/and_alert.dart';
 import 'package:app_socios/utils/alerts/ios_alert.dart';
@@ -8,8 +8,6 @@ import 'package:app_socios/utils/flushBarGlobal.dart';
 import 'package:app_socios/utils/selectFile/previsualizacion.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 
 class SeleccionArchivos {
   //todo IMÁGENES
@@ -129,4 +127,4 @@ class Permission {
   static var storage;
 
   static var camera;
-}
+}*/

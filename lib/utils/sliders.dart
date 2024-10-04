@@ -1,27 +1,35 @@
+import 'dart:io';
+
+import 'package:app_socios/utils/global.dart';
 import 'package:flutter/material.dart';
 
 class Slide {
   Slide({
-    required this.title,
+    this.title,
     required this.height,
-    required this.color,
+    this.color,
+    this.path,
   });
 
-  final Color color;
+  final Color? color;
   final double height;
-  final String title;
+  final String? title;
+  final String? path;
 }
 
 var slides = List.generate(
-  3,
+  maxItemsToPost,
   (index) => Slide(
+    path: "",
     title: 'Slide ${index + 1}',
     height: 100.0 + index * 50,
     color: Colors.primaries[index % Colors.primaries.length],
   ),
 );
 
-final List<Widget> sliders = slides
+List<Widget> sliders = slidesWidget(slides);
+
+List<Padding> slidesWidget(List<Slide>? newSlides) => (newSlides ?? slides)
     .map(
       (item) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -32,14 +40,16 @@ final List<Widget> sliders = slides
             width: double.infinity,
             height: item.height,
             child: Center(
-              child: Text(
-                item.title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: item.path != null
+                  ? Image.file(File(item.path!))
+                  : Text(
+                      item.title!,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
             ),
           ),
         ),

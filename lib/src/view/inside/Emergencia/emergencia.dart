@@ -37,9 +37,16 @@ class _B_EmergenciaState extends State<B_Emergencia>
                 widgethide: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.emergency),
+                    Icon(
+                      Icons.emergency,
+                      color: Colors.grey,
+                    ),
                     SizedBox(width: 5),
-                    Text("Botón de Emergencia")
+                    Text("Botón de Emergencia",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.grey))
                   ],
                 ))
           ];

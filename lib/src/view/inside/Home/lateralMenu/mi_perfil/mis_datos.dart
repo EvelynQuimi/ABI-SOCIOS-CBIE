@@ -84,7 +84,7 @@ class _MisDatosState extends State<MisDatos> with TickerProviderStateMixin {
                   color: Colors.blue,
                 ),
                 Container(
-                  color: const Color.fromARGB(255, 97, 218, 93),
+                  color: const Color.fromARGB(255, 79, 95, 78),
                 ),
                 Container(
                   color: const Color.fromARGB(255, 97, 218, 93),

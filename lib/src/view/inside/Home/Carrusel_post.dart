@@ -32,7 +32,20 @@ class _CarruselPostState extends State<CarruselPost>
           appBar.mySliverAppBar(context,
               widgethide: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Icon(Icons.home), SizedBox(width: 7), Text("Feed")],
+                children: [
+                  Icon(
+                    Icons.home,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(width: 7),
+                  Text(
+                    "Feed",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.grey),
+                  )
+                ],
               ))
         ];
       },
@@ -57,7 +70,8 @@ class _CarruselPostState extends State<CarruselPost>
                     SizedBox(
                       width: 10,
                     ),
-                    Text('NOMBRE DE USUARIO'),
+                    Text('Nombre de usuario',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 )),
             //post
@@ -65,7 +79,7 @@ class _CarruselPostState extends State<CarruselPost>
               child: Container(
                 color: Colors.white,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(height: 10),
@@ -89,7 +103,7 @@ class _CarruselPostState extends State<CarruselPost>
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: slides.asMap().entries.map((entry) {
+                          children: sliders.asMap().entries.map((entry) {
                             return Container(
                               width: 12.0,
                               height: 12.0,
@@ -102,7 +116,7 @@ class _CarruselPostState extends State<CarruselPost>
                                         ? const Color.fromARGB(
                                             255, 139, 139, 139)
                                         : const Color.fromARGB(
-                                            227, 233, 121, 35))
+                                            243, 233, 121, 35))
                                     .withOpacity(
                                         _current == entry.key ? 0.9 : 0.4),
                               ),
@@ -124,6 +138,25 @@ class _CarruselPostState extends State<CarruselPost>
                           ),
                         )
                       ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RichText(
+                              text: TextSpan(
+                                  style: TextStyle(color: Colors.black),
+                                  children: [
+                                TextSpan(
+                                    text: "Nombre de Usuario: ",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                TextSpan(text: "Comentarios..."),
+                              ]))
+                        ],
+                      ),
                     ),
                   ],
                 ),

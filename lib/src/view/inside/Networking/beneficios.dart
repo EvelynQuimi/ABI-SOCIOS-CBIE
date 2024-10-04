@@ -3,7 +3,6 @@ import 'package:standard_searchbar/new/standard_search_anchor.dart';
 import 'package:standard_searchbar/new/standard_search_bar.dart';
 import 'package:standard_searchbar/new/standard_suggestion.dart';
 import 'package:standard_searchbar/new/standard_suggestions.dart';
-
 void main() => runApp(const Beneficios_esta());
 
 class Beneficios_esta extends StatelessWidget {

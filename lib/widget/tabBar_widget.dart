@@ -9,19 +9,19 @@ import 'package:flutter/material.dart';
 Widget tabBarBottom({required TabController controlador}) {
   return TabBar(controller: controlador, tabs: <Widget>[
     Tab(
-      icon: Icon(Icons.home_outlined),
+      icon: Icon(Icons.home_outlined, color: Colors.grey),
     ),
     Tab(
-      icon: Icon(Icons.groups_2_outlined),
+      icon: Icon(Icons.groups_2_outlined, color: Colors.grey),
     ),
     Tab(
-      icon: Icon(Icons.calendar_month),
+      icon: Icon(Icons.calendar_month, color: Colors.grey),
     ),
     Tab(
-      icon: Icon(Icons.emergency),
+      icon: Icon(Icons.emergency, color: Colors.grey),
     ),
     Tab(
-      icon: Icon(Icons.card_giftcard),
+      icon: Icon(Icons.card_giftcard, color: Colors.grey),
     ),
   ]);
 }

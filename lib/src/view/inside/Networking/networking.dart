@@ -40,9 +40,13 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
                 widgethide: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.group),
+                    Icon(Icons.group, color: Colors.grey),
                     SizedBox(width: 5),
-                    Text("Networking")
+                    Text("Networking",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.grey))
                   ],
                 ))
           ];

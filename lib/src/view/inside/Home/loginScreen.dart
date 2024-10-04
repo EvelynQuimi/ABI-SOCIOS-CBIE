@@ -6,6 +6,7 @@ class loginScreen extends StatelessWidget {
   const loginScreen({super.key});
 
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
@@ -87,6 +88,18 @@ class loginScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Recuperar Contraseña',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 0, 0, 255),
+                      ),
+                    ),
+                  ),
+
                   const SizedBox(
                     height: 70,
                   ),

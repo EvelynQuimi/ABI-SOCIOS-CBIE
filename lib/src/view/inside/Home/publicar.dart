@@ -1,100 +1,106 @@
-/*import 'package:camera/camera.dart';
+import 'dart:io';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:insta_assets_picker_demo/pages/camera/camera_picker.dart';
-import 'package:insta_assets_picker_demo/pages/camera/wechat_camera_picker.dart';
-import 'package:insta_assets_picker_demo/pages/restorable_picker.dart';
-import 'package:insta_assets_picker_demo/pages/stateless_pickers.dart';
-import 'package:insta_assets_picker_demo/widgets/insta_picker_interface.dart';
-import 'package:path/path.dart';
-import 'pages/camera/wechat_camera_picker.dart';
+import 'package:insta_assets_picker/insta_assets_picker.dart';
+import 'crop_result_view.dart';
 
-const kDefaultColor = Colors.deepPurple;
+class PickerDescription {
+  final String icon;
+  final String label;
+  final String? description;
 
-late List<CameraDescription> _cameras;
+  const PickerDescription({
+    required this.icon,
+    required this.label,
+    this.description,
+  });
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  _cameras = await availableCameras();
-  runApp(Publicar(context as BuildContext));
+  String get fullLabel => '$icon $label';
 }
 
-class Publicar extends StatelessWidget {
-  const Publicar(BuildContext context, {super.key});
+mixin InstaPickerInterface on Widget {
+  PickerDescription get description;
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      // update to change the main theme of app + picker
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: kDefaultColor,
-          brightness: Brightness.dark,
-        ),
-        cardTheme: const CardTheme(
-          elevation: 2,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-        ),
-        listTileTheme: const ListTileThemeData(
-          enableFeedback: true,
-          contentPadding: EdgeInsets.all(16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-          titleTextStyle: TextStyle(fontWeight: FontWeight.w600),
-          leadingAndTrailingTextStyle: TextStyle(fontSize: 24),
-        ),
-      ),
-      home: const PickersScreen(),
-      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-        GlobalWidgetsLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+  ThemeData getPickerTheme(BuildContext context) {
+    return InstaAssetPicker.themeData(kDefaultIconDarkColor).copyWith(
+      appBarTheme: const AppBarTheme(titleTextStyle: TextStyle(fontSize: 16)),
     );
   }
-}
 
-class PickersScreen extends StatelessWidget {
-  const PickersScreen({super.key});
+  AppBar get _appBar => AppBar(title: Text(description.fullLabel));
 
-  @override
-  Widget build(BuildContext context) {
-    final List<InstaPickerInterface> pickers = [
-      const SinglePicker(),
-      const MultiplePicker(),
-      const RestorablePicker(),
-      CameraPicker(camera: _cameras.first),
-      const WeChatCameraPicker(),
-    ];
+  /// NOTE: Exception on android when playing video recorded from the camera
+  /// with [ResolutionPreset.max] after FFmpeg encoding
+  ResolutionPreset get cameraResolutionPreset =>
+      Platform.isAndroid ? ResolutionPreset.high : ResolutionPreset.max;
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Insta pickers')),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(16),
-        itemBuilder: (BuildContext context, int index) {
-          final PickerDescription description = pickers[index].description;
-
-          return Card(
-            child: ListTile(
-              leading: Text(description.icon),
-              title: Text(description.label),
-              subtitle: description.description != null
-                  ? Text(description.description!)
-                  : null,
-              trailing: const Icon(Icons.chevron_right_rounded),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => pickers[index]),
+  Column pickerColumn({
+    String? text,
+    required VoidCallback onPressed,
+  }) =>
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Center(
+            child: Text(
+              text ??
+                  'The ${description.label} will push result in a new screen',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+          TextButton(
+            onPressed: onPressed,
+            child: FittedBox(
+              child: Text(
+                'Open the ${description.label}',
+                style: const TextStyle(fontSize: 20),
               ),
+            ),
+          ),
+        ],
+      );
+
+  Scaffold buildLayout(
+    BuildContext context, {
+    required VoidCallback onPressed,
+  }) =>
+      Scaffold(
+        appBar: _appBar,
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: pickerColumn(onPressed: onPressed),
+        ),
+      );
+
+  Scaffold buildCustomLayout(
+    BuildContext context, {
+    required Widget child,
+  }) =>
+      Scaffold(
+        appBar: _appBar,
+        body: Padding(padding: const EdgeInsets.all(16), child: child),
+      );
+
+  void pickAssets(BuildContext context, {required int maxAssets}) =>
+      InstaAssetPicker.pickAssets(
+        context,
+        pickerConfig: InstaAssetPickerConfig(
+          title: description.fullLabel,
+          closeOnComplete: true,
+          pickerTheme: getPickerTheme(context),
+          // skipCropOnComplete: true, // to test ffmpeg crop image
+          // previewThumbnailSize: const ThumbnailSize(240, 240), // to improve thumbnails speed in crop view
+        ),
+        maxAssets: maxAssets,
+        onCompleted: (Stream<InstaAssetsExportDetails> cropStream) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  PickerCropResultScreen(cropStream: cropStream),
             ),
           );
         },
-        separatorBuilder: (_, __) => const SizedBox(height: 4),
-        itemCount: pickers.length,
-      ),
-    );
-  }
-}*/
+      );
+}
