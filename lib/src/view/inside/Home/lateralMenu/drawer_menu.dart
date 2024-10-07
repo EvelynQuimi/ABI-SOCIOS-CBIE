@@ -4,6 +4,7 @@ import 'package:app_socios/src/view/inside/Home/lateralMenu/mi_perfil/mis_datos.
 import 'package:app_socios/utils/alerts/and_alert.dart';
 import 'package:app_socios/utils/alerts/ios_alert.dart';
 import 'package:app_socios/utils/deviders/divider.dart';
+import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:app_socios/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -98,7 +99,7 @@ Drawer drawerMenu(context, {bool? inicio}) {
               Navigator.push(
                   context, MaterialPageRoute(builder: (builder) => MisDatos()));
             },
-            leading: const Icon(Icons.description),
+            leading: const Icon(Abi_socios.misdatos_icono),
             /*trailing: const Icon(
               Icons.navigate_next_sharp,
               color: Colors.black,
@@ -181,7 +182,7 @@ Drawer drawerMenu(context, {bool? inicio}) {
               Navigator.pop(context);
             },
             leading: const Icon(
-              Icons.edit_document,
+              Abi_socios.terminosycondiciones_icono,
               color: Colors.black,
             ),
             title: const Text(
@@ -372,7 +373,7 @@ void showModal(BuildContext context) {
             children: [
               const SizedBox(height: 10),
               const ListTile(
-                  leading: Icon(Icons.settings, color: Colors.black),
+                  leading: Icon(Abi_socios.configuracion_icono),
                   title: Text(
                     "Configuración",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),

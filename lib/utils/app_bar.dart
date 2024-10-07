@@ -1,5 +1,6 @@
 import 'package:app_socios/src/view/inside/Home/Notificaciones/Notificaciones.dart';
 import 'package:app_socios/src/view/inside/Home/Publicar.dart';
+import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_assets_picker/insta_assets_picker.dart';
 import 'package:path/path.dart';
@@ -43,7 +44,7 @@ class MyAppBar extends Widget with InstaPickerInterface {
               onPressed: () {}),
           IconButton(
               icon: const Icon(
-                Icons.notifications_none, //icono de notificaciones
+                Abi_socios.campanita, //icono de notificaciones
                 size: 30,
               ),
               onPressed: () {}),
@@ -64,17 +65,17 @@ class MyAppBar extends Widget with InstaPickerInterface {
           centerTitle: true,
           leading: IconButton(
             icon: const Icon(
-              Icons.menu,
-              color: Colors.grey,
-              size: 30,
+              Abi_socios.hamburguesa_icono,
+              color: Colors.black,
+              size: 35,
             ),
             onPressed: () => key.currentState!.openDrawer(),
           ),
           actions: [
             IconButton(
                 icon: const Icon(
-                  Icons.add, //Icono de subir post
-                  size: 30, color: Colors.grey,
+                  Abi_socios.agregar, //Icono de subir post
+                  size: 20, color: Colors.black,
                 ),
                 onPressed: () => metodo(
                     context) /*Navigator.push(
@@ -83,10 +84,9 @@ class MyAppBar extends Widget with InstaPickerInterface {
                         builder: (builder) => PickerDescription(context)))*/
                 ),
             IconButton(
-                icon: const Icon(
-                    Icons.notifications_none, //icono de notificaciones
-                    size: 30,
-                    color: Colors.grey),
+                icon: const Icon(Abi_socios.campanita, //icono de notificaciones
+                    size: 22,
+                    color: Colors.black),
                 onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(

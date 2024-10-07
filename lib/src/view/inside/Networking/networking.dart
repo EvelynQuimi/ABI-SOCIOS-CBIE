@@ -1,6 +1,7 @@
 import 'package:app_socios/src/view/inside/Networking/beneficios.dart';
 import 'package:app_socios/src/view/inside/Networking/socios.dart';
 import 'package:app_socios/utils/app_bar.dart';
+import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:app_socios/widget/tabBar_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,7 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
                     text: ("SOCIOS"),
                   ),
                   Tab(
-                    icon: Icon(Icons.star_rate),
+                    icon: Icon(Abi_socios.beneficio_icono),
                     text: ("BENEFICIOS"),
                   ),
                 ],

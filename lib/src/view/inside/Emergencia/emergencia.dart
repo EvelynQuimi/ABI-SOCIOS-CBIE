@@ -1,4 +1,5 @@
 import 'package:app_socios/utils/app_bar.dart';
+import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:flutter/material.dart';
 
 class B_Emergencia extends StatefulWidget {
@@ -38,7 +39,7 @@ class _B_EmergenciaState extends State<B_Emergencia>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.emergency,
+                      Abi_socios.emergencia_icono,
                       color: Colors.grey,
                     ),
                     SizedBox(width: 5),

@@ -64,7 +64,7 @@ class _screenloginState extends State<screenlogin> {
               height: Responsive.of(context).hp(45),
               width: double.infinity,
               child: Image.asset(
-                "assets/social.png",
+                "assets/imagen-login.png",
                 fit: BoxFit.cover,
               ),
             ),
@@ -89,7 +89,7 @@ class _screenloginState extends State<screenlogin> {
         children: [
           HeaderFormLogin(
             widthPath: 180,
-            path: "assets/abi_praxis_logo.png",
+            path: "assets/logo-cbei.png",
             child: Form(
               key: formKey,
               child: Container(

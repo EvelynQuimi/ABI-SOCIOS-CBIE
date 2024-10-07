@@ -1,27 +1,34 @@
+import 'dart:nativewrappers/_internal/vm/lib/ffi_patch.dart';
+
 import 'package:app_socios/src/models/post.dart';
 import 'package:app_socios/src/view/inside/Emergencia/emergencia.dart';
 import 'package:app_socios/src/view/inside/Eventos/Agenda/Eventos.dart';
 import 'package:app_socios/src/view/inside/Home/Carrusel_post.dart';
 import 'package:app_socios/src/view/inside/Networking/networking.dart';
 import 'package:app_socios/src/view/inside/tarjeta_virtual/tarjeta.dart';
+import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:flutter/material.dart';
 
 Widget tabBarBottom({required TabController controlador}) {
   return TabBar(controller: controlador, tabs: <Widget>[
     Tab(
-      icon: Icon(Icons.home_outlined, color: Colors.grey),
+      icon: Icon(Abi_socios.casita, color: Colors.black),
     ),
     Tab(
-      icon: Icon(Icons.groups_2_outlined, color: Colors.grey),
+      icon: Icon(
+        Abi_socios.networking_icono,
+        color: Colors.black,
+        size: 35,
+      ),
     ),
     Tab(
-      icon: Icon(Icons.calendar_month, color: Colors.grey),
+      icon: Icon(Abi_socios.eventos_icono, color: Colors.black),
     ),
     Tab(
-      icon: Icon(Icons.emergency, color: Colors.grey),
+      icon: Icon(Abi_socios.emergencia_icono, color: Colors.black),
     ),
     Tab(
-      icon: Icon(Icons.card_giftcard, color: Colors.grey),
+      icon: Icon(Abi_socios.tarjeta_icono, color: Colors.black),
     ),
   ]);
 }
