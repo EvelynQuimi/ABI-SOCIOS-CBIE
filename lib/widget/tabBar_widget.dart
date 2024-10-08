@@ -1,5 +1,3 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_patch.dart';
-
 import 'package:app_socios/src/models/post.dart';
 import 'package:app_socios/src/view/inside/Emergencia/emergencia.dart';
 import 'package:app_socios/src/view/inside/Eventos/Agenda/Eventos.dart';

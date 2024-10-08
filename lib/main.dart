@@ -1,5 +1,4 @@
 import 'package:app_socios/WelcomeScreen.dart';
-import 'package:app_socios/src/view/inside/Home/loginScreen.dart';
 import 'package:app_socios/src/view/inside/Home/screenlogin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

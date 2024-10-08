@@ -41,13 +41,13 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
                 widgethide: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.group, color: Colors.grey),
+                    Icon(Abi_socios.networking_icono, color: Colors.black),
                     SizedBox(width: 5),
                     Text("Networking",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
-                            color: Colors.grey))
+                            color: Colors.black))
                   ],
                 ))
           ];
@@ -59,7 +59,7 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
                 controller: _tabController,
                 tabs: const <Widget>[
                   Tab(
-                    icon: Icon(Icons.groups),
+                    icon: Icon(Abi_socios.networking_icono),
                     text: ("SOCIOS"),
                   ),
                   Tab(

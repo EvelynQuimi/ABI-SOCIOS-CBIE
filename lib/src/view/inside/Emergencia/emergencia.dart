@@ -1,5 +1,6 @@
 import 'package:app_socios/utils/app_bar.dart';
 import 'package:app_socios/utils/icons/abi_socios_icons.dart';
+import 'package:app_socios/utils/responsive.dart';
 import 'package:flutter/material.dart';
 
 class B_Emergencia extends StatefulWidget {
@@ -32,30 +33,37 @@ class _B_EmergenciaState extends State<B_Emergencia>
   Widget build(BuildContext context) {
     //El titulo de las vistas
     return NestedScrollView(
-        headerSliverBuilder: (context, val) {
-          return [
-            appBar.mySliverAppBar(context,
-                widgethide: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Abi_socios.emergencia_icono,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(width: 5),
-                    Text("Botón de Emergencia",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.grey))
-                  ],
-                ))
-          ];
-        },
-        body: Container(
-          color: Colors.white,
-        )
-        //Expanded(child: Image.asset('assets/icons/social.png')),
-        );
+      headerSliverBuilder: (context, val) {
+        return [
+          appBar.mySliverAppBar(context,
+              widgethide: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Abi_socios.emergencia_icono,
+                    color: Colors.black,
+                  ),
+                  SizedBox(width: 5),
+                  Text("Botón de Emergencia",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black))
+                ],
+              ))
+        ];
+      },
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          height: Responsive.of(context).hp(35),
+          width: double.infinity,
+          child: Image.asset(
+            "assets/boton-emergencia.png",
+            fit: BoxFit.scaleDown,
+          ),
+        ),
+      ),
+    );
   }
 }

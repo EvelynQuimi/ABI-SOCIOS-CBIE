@@ -1,4 +1,5 @@
-import 'package:app_socios/src/view/inside/Home/loginScreen.dart';
+
+import 'package:app_socios/src/view/inside/Home/screenlogin.dart';
 import 'package:app_socios/utils/buttons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -168,7 +169,7 @@ class IosAlert {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (builder) => const loginScreen()));
+                          builder: (builder) => const screenlogin()));
                 },
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:app_socios/src/view/inside/Home/home_screen.dart';
 import 'package:app_socios/utils/alerts/and_alert.dart';
 import 'package:app_socios/utils/alerts/ios_alert.dart';
 import 'package:app_socios/utils/header_form_login.dart';
+import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:app_socios/utils/loading.dart';
 import 'package:app_socios/utils/responsive.dart';
 import 'package:flutter/material.dart';
@@ -112,8 +113,9 @@ class _screenloginState extends State<screenlogin> {
                         labelStyle: TextStyle(fontWeight: FontWeight.bold),
                         labelText: "Correo electrónico",
                         prefixIcon: Icon(
-                          Icons.person_pin,
+                          Abi_socios.mail_icono,
                           color: Colors.black,
+                          size: 15,
                         ),
                       ),
                     ),
@@ -144,8 +146,9 @@ class _screenloginState extends State<screenlogin> {
                             const TextStyle(fontWeight: FontWeight.bold),
                         labelText: "Contraseña",
                         prefixIcon: const Icon(
-                          Icons.password_outlined,
+                          Abi_socios.contrasena,
                           color: Colors.black,
+                          size: 20,
                         ),
                       ),
                     ),

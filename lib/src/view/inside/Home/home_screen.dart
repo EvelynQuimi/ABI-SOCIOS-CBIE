@@ -4,7 +4,6 @@ import 'package:app_socios/utils/app_bar.dart';
 import 'package:app_socios/widget/tabBar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:app_socios/src/view/inside/Home/home_screen.dart';
-import 'package:app_socios/src/view/inside/Home/loginScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         drawer: drawerMenu(context), //Dar funcion al icono de menú
         key: _sckey,
         body: menu());

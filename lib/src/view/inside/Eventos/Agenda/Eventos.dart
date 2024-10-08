@@ -2,6 +2,7 @@ import 'package:app_socios/src/view/inside/Home/Carrusel_post.dart';
 import 'package:app_socios/src/view/inside/Home/home_screen.dart';
 import 'package:app_socios/utils/app_bar.dart';
 import 'package:app_socios/utils/global.dart';
+import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:app_socios/utils/responsive.dart';
 import 'package:app_socios/utils/sliders.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -25,7 +26,7 @@ class _EventosState extends State<Eventos> with TickerProviderStateMixin {
 
   void inicializarListaSlide() {
     var list = List.generate(
-      4,
+      3,
       (i) => Column(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -63,7 +64,7 @@ class _EventosState extends State<Eventos> with TickerProviderStateMixin {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             )),
-                        TextSpan(text: "Edificio de camara de $i "),
+                        TextSpan(text: "Descripcion $i "),
                       ]))),
             ],
           ),
@@ -102,13 +103,13 @@ class _EventosState extends State<Eventos> with TickerProviderStateMixin {
               widgethide: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.calendar_today, color: Colors.grey),
+                  Icon(Abi_socios.agenda_icono, color: Colors.black),
                   SizedBox(width: 5),
                   Text("Eventos",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          color: Colors.grey))
+                          color: Colors.black))
                 ],
               ))
         ];

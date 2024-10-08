@@ -1,6 +1,7 @@
 import 'package:app_socios/Carrusel.dart';
 import 'package:app_socios/main.dart';
 import 'package:app_socios/utils/app_bar.dart';
+import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:app_socios/utils/sliders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -34,16 +35,17 @@ class _CarruselPostState extends State<CarruselPost>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.home,
-                    color: Colors.grey,
+                    Abi_socios.casita,
+                    color: Colors.black,
+                    size: 16,
                   ),
-                  SizedBox(width: 7),
+                  SizedBox(width: 8),
                   Text(
                     "Feed",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        color: Colors.grey),
+                        color: Colors.black),
                   )
                 ],
               ))
@@ -153,7 +155,7 @@ class _CarruselPostState extends State<CarruselPost>
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     )),
-                                TextSpan(text: "Comentarios..."),
+                                TextSpan(text: "Descripcion de publicación..."),
                               ]))
                         ],
                       ),

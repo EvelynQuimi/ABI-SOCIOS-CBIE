@@ -1,11 +1,11 @@
 import 'package:app_socios/src/view/inside/Home/Notificaciones/Notificaciones.dart';
 import 'package:app_socios/src/view/inside/Home/Publicar.dart';
 import 'package:app_socios/utils/icons/abi_socios_icons.dart';
+import 'package:app_socios/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:insta_assets_picker/insta_assets_picker.dart';
 import 'package:path/path.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
-
 import '../src/view/inside/Home/crop_result_view.dart';
 
 class MyAppBar extends Widget with InstaPickerInterface {
@@ -15,13 +15,14 @@ class MyAppBar extends Widget with InstaPickerInterface {
 
   ThemeData themeData = ThemeData();
 
-  AppBar myAppBar(
+  /*AppBar myAppBar(
           {bool? back, BuildContext? context, required Container widgethide}) =>
       AppBar(
         leading: IconButton(
           onPressed: () => key.currentState!.openDrawer(),
           icon: Icon(
-            Icons.menu_rounded, //icono de menú
+            Abi_socios.hamburguesa_icono,
+            //icono de menú
             size: 30,
             color: Colors.grey[600],
           ),
@@ -38,7 +39,8 @@ class MyAppBar extends Widget with InstaPickerInterface {
         actions: [
           IconButton(
               icon: const Icon(
-                Icons.add, //Icono de subir post
+                Abi_socios.agregar,
+                //Icono de subir post
                 size: 30,
               ),
               onPressed: () {}),
@@ -49,21 +51,32 @@ class MyAppBar extends Widget with InstaPickerInterface {
               ),
               onPressed: () {}),
         ],
-      );
+      );*/
 
   SliverAppBar mySliverAppBar(BuildContext context,
           {required Widget widgethide}) =>
-      SliverAppBar(
+      SliverAppBar( 
+          toolbarHeight: 127,
+          leadingWidth: 0.0,
+          titleSpacing: 0.0,
           scrolledUnderElevation: 0.0,
-          elevation: 0,
+          elevation: 100,
           backgroundColor: const Color.fromARGB(
               255, 255, 255, 255), //themeData.scaffoldBackgroundColor,
-          /*title: SizedBox(
-        width: 130,
-        child: Image.asset('assets/abi_praxis_logo.png'),
-      ),*/
+          title: Align(
+            alignment: Alignment.center,
+            child: Container(
+              height: Responsive.of(context).hp(20),
+              width: double.infinity,
+              child: Image.asset(
+                "assets/banner-top.png",
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
           centerTitle: true,
-          leading: IconButton(
+          
+          /*leading: IconButton(
             icon: const Icon(
               Abi_socios.hamburguesa_icono,
               color: Colors.black,
@@ -91,12 +104,12 @@ class MyAppBar extends Widget with InstaPickerInterface {
                     context,
                     MaterialPageRoute(
                         builder: (builder) => NotificacionesScreen(context))))
-          ],
+          ],*/
           floating: true,
           pinned: true,
           snap: false,
           bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(20), child: widgethide));
+              preferredSize: const Size.fromHeight(50), child: widgethide));
 
   Future<void> _pickFromWeChatCamera(BuildContext context) async {
     Feedback.forTap(context);
@@ -138,7 +151,7 @@ class MyAppBar extends Widget with InstaPickerInterface {
             InstaPickerCircleIconButton(
               onTap: () => _pickFromWeChatCamera(context),
               theme: pickerTheme,
-              icon: const Icon(Icons.camera_alt),
+              icon: const Icon(Abi_socios.camera),
               size: height,
             ),
           ],

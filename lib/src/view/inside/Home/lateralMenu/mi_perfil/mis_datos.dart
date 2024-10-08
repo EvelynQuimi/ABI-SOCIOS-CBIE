@@ -1,6 +1,7 @@
 import 'package:app_socios/src/view/inside/Home/lateralMenu/drawer_menu.dart';
 import 'package:app_socios/src/view/inside/Home/lateralMenu/mi_perfil/form_contactos.dart';
 import 'package:app_socios/utils/app_bar.dart';
+import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:flutter/material.dart';
 
 class MisDatos extends StatefulWidget {
@@ -41,7 +42,7 @@ class _MisDatosState extends State<MisDatos> with TickerProviderStateMixin {
                     widgethide: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.person),
+                        Icon(Abi_socios.misdatos_icono, size: 15),
                         SizedBox(width: 5),
                         Text("Mis datos")
                       ],
