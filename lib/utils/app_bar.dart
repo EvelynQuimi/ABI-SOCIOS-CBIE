@@ -19,64 +19,6 @@ class MyAppBar extends Widget with InstaPickerInterface {
           {bool? back, BuildContext? context, required Container widgethide}) =>
       AppBar(
         leading: IconButton(
-          onPressed: () => key.currentState!.openDrawer(),
-          icon: Icon(
-            Abi_socios.hamburguesa_icono,
-            //icono de menú
-            size: 30,
-            color: Colors.grey[600],
-          ),
-        ),
-        titleSpacing: 3,
-        title: const Text(
-          'CBEI',
-          style: TextStyle(
-              decoration: TextDecoration.none,
-              fontSize: 29,
-              color: Color.fromARGB(255, 14, 14, 14),
-              fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          IconButton(
-              icon: const Icon(
-                Abi_socios.agregar,
-                //Icono de subir post
-                size: 30,
-              ),
-              onPressed: () {}),
-          IconButton(
-              icon: const Icon(
-                Abi_socios.campanita, //icono de notificaciones
-                size: 30,
-              ),
-              onPressed: () {}),
-        ],
-      );*/
-
-  SliverAppBar mySliverAppBar(BuildContext context,
-          {required Widget widgethide}) =>
-      SliverAppBar( 
-          toolbarHeight: 127,
-          leadingWidth: 0.0,
-          titleSpacing: 0.0,
-          scrolledUnderElevation: 0.0,
-          elevation: 100,
-          backgroundColor: const Color.fromARGB(
-              255, 255, 255, 255), //themeData.scaffoldBackgroundColor,
-          title: Align(
-            alignment: Alignment.center,
-            child: Container(
-              height: Responsive.of(context).hp(20),
-              width: double.infinity,
-              child: Image.asset(
-                "assets/banner-top.png",
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-          centerTitle: true,
-          
-          /*leading: IconButton(
             icon: const Icon(
               Abi_socios.hamburguesa_icono,
               color: Colors.black,
@@ -104,7 +46,84 @@ class MyAppBar extends Widget with InstaPickerInterface {
                     context,
                     MaterialPageRoute(
                         builder: (builder) => NotificacionesScreen(context))))
-          ],*/
+          ],
+      );*/
+
+  SliverAppBar mySliverAppBar(BuildContext context,
+          {required Widget widgethide, bool? action}) =>
+      SliverAppBar(
+          automaticallyImplyLeading: false,
+          toolbarHeight: 85,
+          leadingWidth: 0.0,
+          titleSpacing: 0.0,
+          scrolledUnderElevation: 0.0,
+          elevation: 110,
+          backgroundColor: const Color.fromARGB(
+              255, 255, 255, 255), //themeData.scaffoldBackgroundColor,
+          flexibleSpace: FlexibleSpaceBar(
+            title: Stack(
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: Responsive.of(context).hp(12.5),
+                    width: double.infinity,
+                    child: Image.asset(
+                      "assets/banner-top.png",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Image.asset(
+                    "assets/logo-cbei.png",
+                    width: 55,
+                    height: 55,
+                  ),
+                ),
+                Positioned(
+                  bottom: 10,
+                  left: -10,
+                  child: IconButton(
+                    icon: const Icon(
+                      Abi_socios.hamburguesa_icono,
+                      color: Colors.black,
+                      size: 25,
+                    ),
+                    onPressed: () => key.currentState!.openDrawer(),
+                  ),
+                ),
+                if (action != null && action)
+                  Positioned(
+                    bottom: 10,
+                    right: 17,
+                    child: IconButton(
+                        icon: const Icon(
+                          Abi_socios.agregar, //Icono de subir post
+                          size: 13, color: Colors.black,
+                        ),
+                        onPressed: () => metodo(context)),
+                  ),
+                if (action != null && action)
+                  Positioned(
+                      bottom: 10,
+                      right: -12,
+                      child: IconButton(
+                          icon: const Icon(
+                              Abi_socios.campanita, //icono de notificaciones
+                              size: 15,
+                              color: Colors.black),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) =>
+                                      NotificacionesScreen(context))))),
+              ],
+            ),
+          ),
+          centerTitle: true,
+          expandedHeight: 155,
           floating: true,
           pinned: true,
           snap: false,

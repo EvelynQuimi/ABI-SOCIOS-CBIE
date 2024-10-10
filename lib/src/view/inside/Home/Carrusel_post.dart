@@ -18,7 +18,6 @@ class _CarruselPostState extends State<CarruselPost>
     with TickerProviderStateMixin {
   int _current = 0;
   late MyAppBar appBar;
-
   @override
   void initState() {
     super.initState();
@@ -31,21 +30,27 @@ class _CarruselPostState extends State<CarruselPost>
       headerSliverBuilder: (context, val) {
         return [
           appBar.mySliverAppBar(context,
-              widgethide: Row(
+              action: true,
+              widgethide: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Abi_socios.casita,
-                    color: Colors.black,
-                    size: 16,
-                  ),
-                  SizedBox(width: 8),
-                  Text(
-                    "Feed",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.black),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Abi_socios.casita,
+                        color: Colors.black,
+                        size: 16,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        "Feed",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.black),
+                      )
+                    ],
                   )
                 ],
               ))

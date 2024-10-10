@@ -36,25 +36,27 @@ class _Tarjeta_vState extends State<Tarjeta_v> with TickerProviderStateMixin {
     return NestedScrollView(
         headerSliverBuilder: (context, val) {
           return [
-            appBar.mySliverAppBar(context,
-                widgethide: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [ 
-                    Icon(Abi_socios.tarjeta_icono),
-                    SizedBox(width: 10),
-                    Text("Mi Tarjeta Virtual",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.black))
-                  ],
-                ),
-                )
+            appBar.mySliverAppBar(
+              context,
+              widgethide: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Abi_socios.tarjeta_icono),
+                  SizedBox(width: 15),
+                  Text("Mi Tarjeta Virtual",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black))
+                ],
+              ),
+            )
           ];
         },
         body: FloatingPullUpCardLayout(
+          cardElevation: BorderSide.strokeAlignCenter,
           child: Container(
-            height: Responsive.of(context).hp(38),
+            height: Responsive.of(context).hp(10),
             width: double.infinity,
             child: Image.asset(
               "assets/tarjeta-virtual.png",

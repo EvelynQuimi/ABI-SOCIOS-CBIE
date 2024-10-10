@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.44"
+  animated_dropdown_search_codespark:
+    dependency: "direct main"
+    description:
+      name: animated_dropdown_search_codespark
+      sha256: "6fdbac6d9baa5404c82125a41d1a0ff0aed860794e17a6f20ffcca42cc602b36"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   args:
     dependency: transitive
     description:
@@ -193,6 +201,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  entry:
+    dependency: transitive
+    description:
+      name: entry
+      sha256: e3250f8ca233cee315576fd1026de4698f140f4abd5ae21aab7e3ab1630a3770
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   extended_image:
     dependency: transitive
     description:
@@ -382,6 +398,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.0"
+  flutter_easy_search_bar:
+    dependency: "direct main"
+    description:
+      name: flutter_easy_search_bar
+      sha256: "1a9524edce18b8854f5b6d0cb56ce9f125a6cdcfdbf8d404fc415437216cc901"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -765,6 +789,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  simple_animations:
+    dependency: transitive
+    description:
+      name: simple_animations
+      sha256: "1ea7b93fb98e2a611b6865d632de55607b766328d14700143353129ee0559d3a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.2"
   sky_engine:
     dependency: transitive
     description: flutter

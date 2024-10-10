@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animated_dropdown_search_codespark: ^2.0.2
   camera: ^0.10.0
   carousel_slider: ^5.0.0
   cloud_firestore: ^5.4.1
@@ -44,6 +45,7 @@ dependencies:
   flutter_carousel_widget: ^3.0.1
   flutter_contacts: ^1.1.9+2
   flutter_dotenv: ^5.1.0
+  flutter_easy_search_bar: ^0.0.2
   flutter_localizations:
     sdk: flutter
   flutter_svg: ^2.0.10+1

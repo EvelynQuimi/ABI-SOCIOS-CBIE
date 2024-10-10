@@ -1,45 +1,57 @@
+import 'package:animated_dropdown_search_codespark/animated_dropdown_search_codespark.dart';
+import 'package:app_socios/src/view/inside/Home/screenlogin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:standard_searchbar/new/standard_search_anchor.dart';
 import 'package:standard_searchbar/new/standard_search_bar.dart';
 import 'package:standard_searchbar/new/standard_suggestion.dart';
 import 'package:standard_searchbar/new/standard_suggestions.dart';
 
-void main() => runApp(const Socios());
+void main() => runApp(Socios());
 
 class Socios extends StatelessWidget {
-  const Socios({super.key});
+  Socios({super.key});
+  final List<String> data = [
+    'Radio Caravana',
+    'Nesec',
+    'City Pet',
+    'Roland',
+    'Grupo KFC',
+    'Don Vito',
+    'El Español',
+    'Buggatti',
+    'Etafashion',
+  ];
+
+  final _searchController = TextEditingController();
+  String searchText = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //   appBar: AppBar(
-      //   title: const Text('Buscar por empresa o representante legal'),
-      //   ),
-      body: const SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
-            SizedBox(height: 10),
-            SizedBox(
-              width: 350,
-              child: StandardSearchAnchor(
-                searchBar: StandardSearchBar(
-                  bgColor: Colors.white,
-                ),
-                suggestions: StandardSuggestions(
-                  suggestions: [
-                    StandardSuggestion(text: 'Nesec'),
-                    StandardSuggestion(text: 'Radio Caravana'),
-                    StandardSuggestion(text: 'Semedic'),
-                  ],
-                ),
-              ),
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: AnimatedDropdownSearch(
+            data: data,
+            onSelected: (value) {
+              print("Selected: $value");
+            },
+            hint: "Buscar Empresa",
+            enableSearch: true,
+            shouldHighlightMatchedText: true,
+            matchedTextHighlightColor: Colors.red,
+            selectedHighlightColor: Colors.orange,
+            maxHeightForOptions: 200,
+            scrollPercentageColorIndicator: Colors.green,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+              borderRadius: BorderRadius.circular(15),
             ),
-          ],
+          ),
         ),
       ),
-      // backgroundColor: Colors.black12,
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
     );
   }
 }

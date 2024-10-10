@@ -38,16 +38,21 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
         headerSliverBuilder: (context, val) {
           return [
             appBar.mySliverAppBar(context,
-                widgethide: Row(
+                widgethide: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Abi_socios.networking_icono, color: Colors.black),
-                    SizedBox(width: 5),
-                    Text("Networking",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.black))
+                    SizedBox(
+                      width: 200,
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Icon(Abi_socios.networking_icono, color: Colors.black),
+                      SizedBox(width: 10),
+                      Text("Networking",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.black))
+                    ])
                   ],
                 ))
           ];
