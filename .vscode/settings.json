@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "C:/Users/JONATHAN/Desktop/flutter_proyectos/app_socios/linux"
+    "cmake.sourceDirectory": "C:/Users/JONATHAN/Desktop/flutter_proyectos/app_socios/linux",
+    "cmake.ignoreCMakeListsMissing": true
 }

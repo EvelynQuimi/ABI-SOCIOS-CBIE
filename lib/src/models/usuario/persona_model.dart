@@ -5,6 +5,7 @@ class PersonaModel {
   String apellidos;
   String fecha_nac;
   String celular;
+  String convencional;
   String correo;
   String? pais;
   String? provincia;
@@ -22,6 +23,7 @@ class PersonaModel {
     required this.correo,
     required this.empresa,
     required this.contrasena,
+    required this.convencional,
     this.pais,
     this.provincia,
     this.ciudad,
@@ -36,6 +38,7 @@ class PersonaModel {
         "apellidos_persona": apellidos,
         "fecha_nac_persona": fecha_nac,
         "celular_persona": celular,
+        "convencional_persona": convencional,
         "correo_persona": correo,
         "empresa_persona": empresa,
         "pais": pais ?? "Ecuador",
@@ -52,6 +55,7 @@ class PersonaModel {
         apellidos: json["apellidos_persona"],
         fecha_nac: json["fecha_nac_persona"],
         celular: json["celular_persona"],
+        convencional: json["convencional_persona"],
         correo: json["correo_persona"] ?? "",
         empresa: json["empresa_persona"] ?? "",
         pais: json["pais"] ?? "Ecuador",
@@ -60,4 +64,6 @@ class PersonaModel {
         contrasena: json["contrasena_persona"],
         foto_perfil: json["foto_perfil"],
       );
+
+  get foto => null;
 }

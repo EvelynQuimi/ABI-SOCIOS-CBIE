@@ -1,19 +1,17 @@
 import 'package:app_socios/src/models/usuario/contacto_model.dart';
-import 'package:app_socios/src/models/usuario/persona_model.dart';
 import 'package:app_socios/src/view/inside/Home/home_screen.dart';
 import 'package:app_socios/utils/header_container.dart';
 import 'package:app_socios/utils/textFields/input_text_form_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fast_forms/flutter_fast_forms.dart';
 
-class PersonaForm extends StatefulWidget {
+class ContacomercialForm extends StatefulWidget {
   @override
-  _PersonaFormState createState() => _PersonaFormState();
+  _ContacomercialFormState createState() => _ContacomercialFormState();
 }
 
-class _PersonaFormState extends State<PersonaForm> {
+class _ContacomercialFormState extends State<ContacomercialForm> {
   final _formKey = GlobalKey<FormState>();
-  final _contacto = ContactoModel(
+  final _comercial = ContactoModel(
     idContacto: 0,
     nombre: '',
     cargo: '',
@@ -23,24 +21,6 @@ class _PersonaFormState extends State<PersonaForm> {
     celular_contac: '',
     tipo_contacto: '',
   );
-
-  final _persona = PersonaModel(
-    idPersona: 0,
-    cedula: '',
-    nombres: '',
-    apellidos: '',
-    celular: '',
-    correo: '',
-    empresa: '',
-    pais: 'Ecuador',
-    provincia: 'Guayas',
-    ciudad: 'Guayaquil',
-    contrasena: '',
-    foto_perfil: '',
-    fecha_nac: '',
-    convencional: '',
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,14 +64,14 @@ class _PersonaFormState extends State<PersonaForm> {
                         body: Container(),
                         title: Container(
                           margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Cédula de Identidad"),
+                          child: text("Cargo"),
                         ),
                         header: Center(
                           child: InputTextFormFields(
                               inputBorder: OutlineInputBorder(
                                   borderSide: BorderSide.none),
                               accionCampo: TextInputAction.next,
-                              nombreCampo: "Ingrese Número de cédula",
+                              nombreCampo: "Cargo",
                               placeHolder: ""),
                         ),
                       ),
@@ -108,43 +88,20 @@ class _PersonaFormState extends State<PersonaForm> {
                         body: Container(),
                         title: Container(
                           margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Telefono celular"),
+                          child: text("Celular"),
                         ),
                         header: Center(
                           child: InputTextFormFields(
                               inputBorder: OutlineInputBorder(
                                   borderSide: BorderSide.none),
                               accionCampo: TextInputAction.next,
-                              nombreCampo: "Ingrese Telefono celular",
+                              nombreCampo: "Ingrese Celular",
                               placeHolder: ""),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Telefono convencional"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Telefono convencional",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
+
                   SizedBox(height: 15),
                   Column(
                     children: [
@@ -217,68 +174,12 @@ class _PersonaFormState extends State<PersonaForm> {
                       ),
                     ],
                   ),
-
-                  /*TextFormField(
-                    decoration: InputDecoration(labelText: 'Nombre'),
-                    onSaved: (value) => _contacto.nombre = value ?? '',
-                    validator: (value) => value?.isEmpty == true
-                        ? 'Ingrese su nombre completo'
-                        : null,
-                  ),
-
-                  TextFormField(
-                    decoration:
-                        InputDecoration(labelText: 'Cédula de Identidad'),
-                    onSaved: (value) => _persona.cedula = value ?? '',
-                    validator: (value) => value?.isEmpty == true
-                        ? 'Ingrese número de cédula'
-                        : null,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Telefono celular'),
-                    onSaved: (value) => _persona.celular = value ?? '',
-                    validator: (value) => value?.isEmpty == true
-                        ? 'Ingrese número de telefono'
-                        : null,
-                  ),
-                  TextFormField(
-                    decoration:
-                        InputDecoration(labelText: 'Telefono convencional'),
-                    onSaved: (value) => _persona.convencional = value ?? '',
-                    validator: (value) => value?.isEmpty == true
-                        ? 'Ingrese número de telefono convencional'
-                        : null,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Mail'),
-                    onSaved: (value) => _persona.correo = value ?? '',
-                    validator: (value) => value?.isEmpty == true
-                        ? 'Ingrese su correo electronico'
-                        : null,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Asistente'),
-                    onSaved: (value) => _contacto.asistente = value ?? '',
-                    validator: (value) => value?.isEmpty == true
-                        ? 'Ingrese nombre de Asistente'
-                        : null,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Mail Asistente'),
-                    onSaved: (value) =>
-                        _contacto.correo_asistente = value ?? '',
-                    validator: (value) => value?.isEmpty == true
-                        ? 'Ingrese mail de Asistente'
-                        : null,
-                  ),*/
-
-                  // Agrega más campos aquí según sea necesario
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState?.validate() == true) {
                         _formKey.currentState?.save();
                         // Aquí puedes hacer lo que necesites con los datos
-                        print(_persona.toJson());
+                        print(_comercial.toJson());
                       }
                     },
                     child: Text('Guardar'),

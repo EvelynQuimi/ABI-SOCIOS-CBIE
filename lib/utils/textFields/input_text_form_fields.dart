@@ -26,32 +26,34 @@ class InputTextFormFields extends StatelessWidget {
   final FocusNode? focus;
   final void Function(String)? onSubmitted;
 
-  const InputTextFormFields(
-      {super.key,
-      this.valorInicial,
-      @required this.accionCampo,
-      @required this.nombreCampo,
-      @required this.placeHolder,
-      this.onSubmitted,
-      this.labelStyle,
-      this.oscurecerTexto,
-      this.controlador,
-      this.align,
-      this.widgetNombreCampo,
-      this.maxLines,
-      this.capitalization,
-      this.inputBorder,
-      this.maxLength,
-      this.onChanged,
-      this.validacion,
-      this.estilo,
-      this.prefixIcon,
-      this.icon,
-      this.listaFormato,
-      this.tipoTeclado,
-      this.habilitado,
-      this.onTap,
-      this.focus});
+  const InputTextFormFields({
+    super.key,
+    this.valorInicial,
+    @required this.accionCampo,
+    @required this.nombreCampo,
+    @required this.placeHolder,
+    this.onSubmitted,
+    this.labelStyle,
+    this.oscurecerTexto,
+    this.controlador,
+    this.align,
+    this.widgetNombreCampo,
+    this.maxLines,
+    this.capitalization,
+    this.inputBorder,
+    this.maxLength,
+    this.onChanged,
+    this.validacion,
+    this.estilo,
+    this.prefixIcon,
+    this.icon,
+    this.listaFormato,
+    this.tipoTeclado,
+    this.habilitado,
+    this.onTap,
+    this.focus,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(

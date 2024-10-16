@@ -15,42 +15,8 @@ class MyAppBar extends Widget with InstaPickerInterface {
 
   ThemeData themeData = ThemeData();
 
-  /*AppBar myAppBar(
-          {bool? back, BuildContext? context, required Container widgethide}) =>
-      AppBar(
-        leading: IconButton(
-            icon: const Icon(
-              Abi_socios.hamburguesa_icono,
-              color: Colors.black,
-              size: 35,
-            ),
-            onPressed: () => key.currentState!.openDrawer(),
-          ),
-          actions: [
-            IconButton(
-                icon: const Icon(
-                  Abi_socios.agregar, //Icono de subir post
-                  size: 20, color: Colors.black,
-                ),
-                onPressed: () => metodo(
-                    context) /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (builder) => PickerDescription(context)))*/
-                ),
-            IconButton(
-                icon: const Icon(Abi_socios.campanita, //icono de notificaciones
-                    size: 22,
-                    color: Colors.black),
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (builder) => NotificacionesScreen(context))))
-          ],
-      );*/
-
   SliverAppBar mySliverAppBar(BuildContext context,
-          {required Widget widgethide, bool? action}) =>
+          {required Widget widgethide, bool? action, bool? hide}) =>
       SliverAppBar(
           automaticallyImplyLeading: false,
           toolbarHeight: 85,
@@ -123,7 +89,7 @@ class MyAppBar extends Widget with InstaPickerInterface {
             ),
           ),
           centerTitle: true,
-          expandedHeight: 155,
+          expandedHeight: hide != null && !hide ? 0 : 155,
           floating: true,
           pinned: true,
           snap: false,

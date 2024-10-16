@@ -8,18 +8,20 @@ class EmpresaModel {
   String tipo_empresa;
   String? logo_empresa;
   String? estado_empresa;
+  String? sitio_web;
 
-  EmpresaModel({
-    required this.idEmpresa,
-    required this.razon_social,
-    required this.ruc,
-    required this.direccion_empresa,
-    required this.telefono,
-    required this.correo_empresa,
-    required this.tipo_empresa,
-    this.logo_empresa,
-    this.estado_empresa,
-  });
+
+  EmpresaModel(
+      {required this.idEmpresa,
+      required this.razon_social,
+      required this.ruc,
+      required this.direccion_empresa,
+      required this.telefono,
+      required this.correo_empresa,
+      required this.tipo_empresa,
+      this.logo_empresa,
+      this.estado_empresa,
+      this.sitio_web});
 
   Map<String, dynamic> toJson() => {
         "id_empresa": idEmpresa,
@@ -30,8 +32,10 @@ class EmpresaModel {
         "correo": correo_empresa,
         "tipo_empresa": tipo_empresa,
         "logo_empresa": logo_empresa,
+        "sitio_web": sitio_web,
         "estado": estado_empresa,
       };
+
   factory EmpresaModel.fromJson(Map<String, dynamic> json) => EmpresaModel(
         idEmpresa: json["id_empresa"],
         razon_social: json["razon_social"],
@@ -41,6 +45,7 @@ class EmpresaModel {
         correo_empresa: json["correo_empresa"],
         tipo_empresa: json["tipo_empresa"],
         logo_empresa: json["logo_empresa"],
+        sitio_web: json["sitio_web"],
         estado_empresa: json["estado_empresa"],
       );
 }

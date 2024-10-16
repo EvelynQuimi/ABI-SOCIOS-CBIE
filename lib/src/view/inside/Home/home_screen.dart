@@ -47,4 +47,4 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 }
 
-text(String s, {required TextStyle style}) {}
+Widget text(String s, {TextStyle? style}) => Text(s, style: style);

@@ -1,5 +1,7 @@
 import 'package:app_socios/src/view/inside/Home/lateralMenu/drawer_menu.dart';
 import 'package:app_socios/src/view/inside/Home/lateralMenu/mi_perfil/form_contactos.dart';
+import 'package:app_socios/src/view/inside/Home/lateralMenu/mi_perfil/form_empresa.dart';
+import 'package:app_socios/src/view/inside/Home/lateralMenu/mi_perfil/form_rep_leg.dart';
 import 'package:app_socios/utils/app_bar.dart';
 import 'package:app_socios/utils/icons/abi_socios_icons.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,8 @@ class MisDatos extends StatefulWidget {
   State<MisDatos> createState() => _MisDatosState();
 }
 
-class _MisDatosState extends State<MisDatos> with TickerProviderStateMixin {
+class _MisDatosState extends State<MisDatos> 
+with TickerProviderStateMixin {
   final keydatos = GlobalKey<ScaffoldState>();
   late final TabController _tabControllerdatos;
   late MyAppBar appBar;
@@ -51,6 +54,25 @@ class _MisDatosState extends State<MisDatos> with TickerProviderStateMixin {
             },
             body: Column(children: [
               Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Container(
+                    width: 110,
+                    height: 110,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage(
+                            'assets/Logo-bg.png'), // Cambia la ruta según sea necesario
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -81,15 +103,11 @@ class _MisDatosState extends State<MisDatos> with TickerProviderStateMixin {
               ),
               Expanded(
                   child: TabBarView(controller: _tabControllerdatos, children: [
-                Container(
-                  color: Colors.blue,
-                ),
-                Container(
-                  color: const Color.fromARGB(255, 79, 95, 78),
-                ),
-                Container(
-                  color: const Color.fromARGB(255, 97, 218, 93),
-                ),
+                PersonaForm(),
+
+                FormEmpresa(),
+
+                Formcontactos(),
                 //Formcontactos(key:),
               ]))
             ])));

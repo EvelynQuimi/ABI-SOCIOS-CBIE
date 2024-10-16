@@ -1,9 +1,10 @@
+import 'package:app_socios/src/view/inside/Home/lateralMenu/mi_perfil/form_contact_comer.dart';
 import 'package:app_socios/utils/app_bar.dart';
 import 'package:flutter/material.dart';
 
 class Formcontactos extends StatefulWidget {
-  GlobalKey<ScaffoldState> sckey;
-  Formcontactos({super.key, required this.sckey});
+  //GlobalKey<ScaffoldState> sckey;
+  Formcontactos({super.key});
 
   @override
   State<Formcontactos> createState() => _FormcontactosState();
@@ -11,6 +12,7 @@ class Formcontactos extends StatefulWidget {
 
 class _FormcontactosState extends State<Formcontactos>
     with TickerProviderStateMixin {
+  final keydatoscontact = GlobalKey<ScaffoldState>();
   late final TabController _tabController;
   late MyAppBar appBar;
 
@@ -18,7 +20,7 @@ class _FormcontactosState extends State<Formcontactos>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    appBar = MyAppBar(key: widget.sckey);
+    appBar = MyAppBar(key: keydatoscontact);
   }
 
   @override
@@ -35,6 +37,13 @@ class _FormcontactosState extends State<Formcontactos>
             color: Colors.white,
             child: Column(children: [
               TabBar(
+                indicator: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15))),
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelColor: Colors.white,
                 controller: _tabController,
                 tabs: const <Widget>[
                   Tab(
@@ -47,7 +56,7 @@ class _FormcontactosState extends State<Formcontactos>
               ),
               Expanded(
                 child: TabBarView(controller: _tabController, children: [
-                  Container(color: Colors.white),
+                  ContacomercialForm(),
                   Container(
                     color: Colors.blue,
                   ),

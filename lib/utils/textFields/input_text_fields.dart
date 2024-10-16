@@ -44,7 +44,7 @@ class InputTextFields extends StatelessWidget {
     this.maxLines,
     this.align,
     this.padding,
-    this.suffixIcon,
+    this.suffixIcon, 
   });
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class InputTextFields extends StatelessWidget {
         keyboardType: tipoTeclado,
         textCapitalization: mayuscula ?? TextCapitalization.none,
         enabled: habilitado,
-        decoration: InputDecoration(
+        decoration:  InputDecoration(
           contentPadding: padding ?? EdgeInsets.zero,
           border: inputBorder,
           prefixIcon: icon,

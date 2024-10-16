@@ -31,6 +31,7 @@ class DatabaseProvider {
   static const String apellidos = "apellidos";
   static const String fecha_nac = "fecha_nacimiento";
   static const String celular = "celular";
+  static const String convencional = "convencional";
   static const String correo = "correo";
   static const String pais = "pais";
   static const String provincia = "provincia";
@@ -46,7 +47,15 @@ class DatabaseProvider {
 
   //TODO VARIABLES RED SOCIAL
   static const String id_red_social = "id_red_social";
-  static const String descripcion_r_social = "descripcion_r_social";
+ static const String descripcion_r_social = "descripcion_r_social";
+
+  // TODO REDSOCIAL_EMPRESA
+   static const String id_redsocial_empresa = "id_redsocial_empresa";
+   static const String instagram = "instagram";
+   static const String x = "x";
+   static const String linkedin = "linkedin";
+   static const String facebook = "facebook";
+   static const String whatsapp = "whatsapp";
 
 //TODO VARIABLES EMPRESA
   static const String id_empresa = "id_empresa";
@@ -57,6 +66,7 @@ class DatabaseProvider {
   static const String correo_empresa = "correo_empresa";
   static const String tipo_empresa = "tipo_empresa";
   static const String logo_empresa = "logo_empresa";
+  static const String sitio_web = "sitio_web";
   static const String estado_empresa = "estado_empresa";
 
 //TODO VARIABLES TIPO DE EMPRESA//
@@ -146,6 +156,7 @@ class DatabaseProvider {
     $apellidos TEXT,
     $fecha_nac TEXT,
     $celular TEXT,
+    $convencional TEXT,
     $correo TEXT,
     $pais TEXT,
     $provincia TEXT,
@@ -165,6 +176,17 @@ class DatabaseProvider {
     $id_red_social INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     $descripcion_r_social TEXT,)""");
 
+      await db.execute("""CREATE TABLE IF NOT EXIST tbl_redsocial_empresa
+    $id_redsocial_empresa INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    $id_empresa TEXT,
+    $id_red_social TEXT,
+    $instagram TEXT,
+    $x TEXT,
+   $linkedin TEXT,
+   $facebook TEXT,
+   $whatsapp TEXT",)""");
+
+
       await db.execute("""CREATE TABLE IF NOT EXIST tbl_empresa(
   $id_empresa INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   $razon_social TEXT,
@@ -174,6 +196,7 @@ class DatabaseProvider {
   $correo_empresa TEXT,
   $tipo_empresa INTEGER,
   $logo_empresa BLOB,
+  $sitio_web TEXT,
   $estado_empresa INTEGER,)""");
 
       await db.execute("""CREATE TABLE IF NOT EXIST tbl_tipo_empresa(

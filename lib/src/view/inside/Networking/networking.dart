@@ -17,6 +17,7 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
     with TickerProviderStateMixin {
   late final TabController _tabController;
   late MyAppBar appBar;
+  bool? hideb;
 
   @override
   void initState() {
@@ -31,6 +32,18 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
     super.dispose();
   }
 
+  void hide() {
+    setState(() {
+      hideb = false;
+    });
+  }
+
+  void show() {
+    setState(() {
+      hideb = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //El titulo de las vistas
@@ -38,6 +51,7 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
         headerSliverBuilder: (context, val) {
           return [
             appBar.mySliverAppBar(context,
+                hide: hideb,
                 widgethide: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -75,8 +89,14 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
               ),
               Expanded(
                 child: TabBarView(controller: _tabController, children: [
-                  Socios(),
-                  Beneficios_esta(),
+                  Socios(
+                    hide: hide,
+                    show: show,
+                  ),
+                  Beneficios_esta(
+                    hide: hide,
+                    show: show,
+                  ),
                 ]),
               )
             ])));

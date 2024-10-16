@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HeaderContainer extends StatelessWidget {
+  AlignmentGeometry? alignment_title;
+
   ///color del borde del header container
   Color? borderColor;
 
@@ -57,6 +59,7 @@ class HeaderContainer extends StatelessWidget {
       required this.has_title,
       this.margin_container,
       this.height_container,
+      this.alignment_title,
       this.radius,
       this.title,
       this.width_container,
@@ -112,7 +115,7 @@ class HeaderContainer extends StatelessWidget {
           ),
         ),
         Align(
-            alignment: Alignment.topCenter,
+            alignment: alignment_title ?? Alignment.center,
             child: title != null ? title! : Container())
       ],
     );

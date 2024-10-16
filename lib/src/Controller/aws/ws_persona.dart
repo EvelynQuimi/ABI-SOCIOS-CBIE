@@ -271,6 +271,8 @@ class WsPersona {
   }
 
   initializeService() {}
+
+  static actualizarPersona(PersonaModel model) {}
 }
 
 extension on UserPreferences {

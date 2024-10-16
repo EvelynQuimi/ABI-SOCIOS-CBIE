@@ -86,114 +86,132 @@ class _screenloginState extends State<screenlogin> {
           if (loading) loadingWidget(text: "Cargando...")
         ],
       );
-  Widget formRegister() => Column(
-        children: [
-          HeaderFormLogin(
-            widthPath: 180,
-            path: "assets/logo-cbei.png",
-            child: Form(
-              key: formKey,
-              child: Container(
-                margin: const EdgeInsets.only(left: 15, right: 15),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      onTap: () {
-                        setState(() => opacity = 50);
-                      },
-                      controller: txtControllerCI,
-                      validator: (value) =>
-                          value!.isEmpty ? "Campo obligatorio *" : null,
-                      //keyboardType: const TextInputType.numberWithOptions(
-                      //   decimal: false, signed: false),
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                      decoration: const InputDecoration(
-                        labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                        labelText: "Correo electrónico",
-                        prefixIcon: Icon(
-                          Abi_socios.mail_icono,
-                          color: Colors.black,
-                          size: 15,
+  Widget formRegister() => Column(children: [
+        HeaderFormLogin(
+          widthPath: 90,
+          path: "assets/logo-cbei.png",
+          child: Form(
+            key: formKey,
+            child: Container(
+              margin: const EdgeInsets.only(left: 15, right: 15),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 35),
+                  TextFormField(
+                    onTap: () {
+                      setState(() => opacity = 50);
+                    },
+                    controller: txtControllerCI,
+                    validator: (value) =>
+                        value!.isEmpty ? "Campo obligatorio *" : null,
+                    //keyboardType: const TextInputType.numberWithOptions(
+                    //   decimal: false, signed: false),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    decoration: const InputDecoration(
+                      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                      labelText: "Correo electrónico",
+                      prefixIcon: Icon(
+                        Abi_socios.mail_icono,
+                        color: Colors.black,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    obscureText: obscure,
+                    onTap: () {
+                      setState(() => opacity = 50);
+                    },
+                    validator: (value) {
+                      if (value != null && value.isNotEmpty) {
+                        return null;
+                      } else {
+                        return "Campo obligatorio *";
+                      }
+                    },
+                    focusNode: focusNode,
+                    controller: txtControllerPassword,
+                    //textAlign: TextAlign.center,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                          onPressed: () => setState(() => obscure = !obscure),
+                          icon: Icon(!obscure
+                              ? Icons.remove_red_eye
+                              : Icons.remove_red_eye_outlined)),
+                      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                      labelText: "Contraseña",
+                      prefixIcon: const Icon(
+                        Abi_socios.contrasena,
+                        color: Colors.black,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreen()));
+                    },
+                    child: Container(
+                      height: 53,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 0, 0, 0),
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          'Acceder',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 255, 255, 255)),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      obscureText: obscure,
-                      onTap: () {
-                        setState(() => opacity = 50);
-                      },
-                      validator: (value) {
-                        if (value != null && value.isNotEmpty) {
-                          return null;
-                        } else {
-                          return "Campo obligatorio *";
-                        }
-                      },
-                      focusNode: focusNode,
-                      controller: txtControllerPassword,
-                      //textAlign: TextAlign.center,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                            onPressed: () => setState(() => obscure = !obscure),
-                            icon: Icon(!obscure
-                                ? Icons.remove_red_eye
-                                : Icons.remove_red_eye_outlined)),
-                        labelStyle:
-                            const TextStyle(fontWeight: FontWeight.bold),
-                        labelText: "Contraseña",
-                        prefixIcon: const Icon(
-                          Abi_socios.contrasena,
-                          color: Colors.black,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreen()));
-                      },
-                      child: Container(
-                        height: 53,
-                        width: 300,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 0, 0, 0),
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(
-                              color: const Color.fromARGB(255, 255, 255, 255)),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Acceder',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 255, 255, 255)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 10),
+                  //const SizedBox(
+                  //height: 10,
+                  //),
+                ],
               ),
             ),
           ),
-        ],
-      );
+        ),
+        const SizedBox(height: 15),
+        aditionaslButtons(),
+      ]);
+  Widget aditionaslButtons() {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () => Navigator.pushNamed(context, 'forgot_password'),
+          child: const Text(
+            '¿Olvidó su contraseña?',
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Text("Recuperar contraseña",
+            style: TextStyle(
+                fontSize: 15, color: const Color.fromARGB(255, 28, 24, 255))),
+        const SizedBox(height: 10),
+        Image.asset(
+          "assets/bybaadal.png",
+          width: 100,
+          fit: BoxFit.fill,
+        )
+      ],
+    );
+  }
 }

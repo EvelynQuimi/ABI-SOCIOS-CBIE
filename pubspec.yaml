@@ -46,8 +46,10 @@ dependencies:
   flutter_contacts: ^1.1.9+2
   flutter_dotenv: ^5.1.0
   flutter_easy_search_bar: ^0.0.2
+  flutter_fast_forms: ^17.1.1
   flutter_localizations:
     sdk: flutter
+  flutter_slidable: ^3.1.1
   flutter_svg: ^2.0.10+1
   geolocator: ^13.0.1
   google_fonts: ^6.2.1
