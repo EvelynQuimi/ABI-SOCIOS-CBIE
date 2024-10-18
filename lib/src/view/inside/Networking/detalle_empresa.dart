@@ -9,6 +9,14 @@ class EmpresaDetailPage extends StatelessWidget {
 
   const EmpresaDetailPage({Key? key, required this.empresa}) : super(key: key);
 
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'No se pudo abrir $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -142,32 +150,27 @@ class EmpresaDetailPage extends StatelessWidget {
                       Abi_socios.linkedin_icono,
                       size: 40,
                     ), // Aquí puedes usar tu icono de LinkedIn
-                    onPressed: () => /* _launchURL */
-                        (empresa["linkedin"] ?? ''),
+                    onPressed: () => _launchURL(empresa["linkedin"] ?? ''),
                   ),
                   IconButton(
                     icon: Icon(Abi_socios.instagram_icono,
                         size: 40), // Aquí puedes usar tu icono de Instagram
-                    onPressed: () => /* _launchURL */
-                        (empresa["instagram"] ?? ''),
+                    onPressed: () => _launchURL(empresa["instagram"] ?? ''),
                   ),
                   IconButton(
                     icon: Icon(Abi_socios.website_icono,
                         size: 40), // Aquí puedes usar tu icono de sitio web
-                    onPressed: () => /* _launchURL */
-                        (empresa["sitio_web"] ?? ''),
+                    onPressed: () => _launchURL(empresa["sitio_web"] ?? ''),
                   ),
                   IconButton(
                     icon: Icon(Abi_socios.facebook_icono,
                         size: 40), // Aquí puedes usar tu icono de Facebook
-                    onPressed: () => /* _launchURL */
-                        (empresa["facebook"] ?? ''),
+                    onPressed: () => _launchURL(empresa["facebook"] ?? ''),
                   ),
                   IconButton(
                     icon: Icon(Abi_socios.x_icono,
                         size: 40), // Aquí puedes usar tu icono de X (Twitter)
-                    onPressed: () => /* _launchURL */
-                        (empresa["twitter"] ?? ''),
+                    onPressed: () => _launchURL(empresa["twitter"] ?? ''),
                   ),
                 ],
               ),
