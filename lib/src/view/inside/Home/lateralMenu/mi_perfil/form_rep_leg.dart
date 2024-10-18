@@ -53,170 +53,62 @@ class _PersonaFormState extends State<PersonaForm> {
               key: _formKey,
               child: Column(
                 children: <Widget>[
-                  HeaderContainer(
-                    height_container: 55,
-                    alignment_title: Alignment.centerLeft,
-                    has_header: true,
-                    has_title: false,
-                    body: Container(),
-                    title: Container(
-                      margin: const EdgeInsets.only(left: 15, right: 15),
-                      child: text("Nombre"),
-                    ),
-                    header: Center(
-                      child: InputTextFormFields(
-                          inputBorder:
-                              OutlineInputBorder(borderSide: BorderSide.none),
-                          accionCampo: TextInputAction.next,
-                          nombreCampo: "Ingrese su Nombre",
-                          placeHolder: ""),
-                    ),
-                  ),
+                  SizedBox(height: 15),
+                  InputTextFormFields(
+                      inputBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      accionCampo: TextInputAction.next,
+                      nombreCampo: "Ingrese su Nombre",
+                      placeHolder: ""),
+
                   // cuadro de texto cédula.
                   SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Cédula de Identidad"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Ingrese Número de cédula",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
+                  InputTextFormFields(
+                      inputBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      accionCampo: TextInputAction.next,
+                      nombreCampo: "Ingrese Número de cédula",
+                      placeHolder: ""),
+
                   SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Telefono celular"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Ingrese Telefono celular",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
+                  InputTextFormFields(
+                      inputBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      accionCampo: TextInputAction.next,
+                      nombreCampo: "Ingrese Telefono celular",
+                      placeHolder: ""),
+
                   SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Telefono convencional"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Telefono convencional",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
+                  InputTextFormFields(
+                      inputBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      accionCampo: TextInputAction.next,
+                      nombreCampo: "Telefono convencional",
+                      placeHolder: ""),
+
                   SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Mail"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Mail",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
+                  InputTextFormFields(
+                      inputBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      accionCampo: TextInputAction.next,
+                      nombreCampo: "Mail",
+                      placeHolder: ""),
+
                   SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Asistente"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Asistente",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
+                  InputTextFormFields(
+                      inputBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      accionCampo: TextInputAction.next,
+                      nombreCampo: "Asistente",
+                      placeHolder: ""),
+
                   SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Mail Asistente"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Mail Asistente",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
+                  InputTextFormFields(
+                      inputBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black)),
+                      accionCampo: TextInputAction.next,
+                      nombreCampo: "Mail Asistente",
+                      placeHolder: ""),
 
                   /*TextFormField(
                     decoration: InputDecoration(labelText: 'Nombre'),

@@ -40,253 +40,94 @@ class _FormEmpresaState extends State<FormEmpresa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  HeaderContainer(
-                    height_container: 55,
-                    alignment_title: Alignment.centerLeft,
-                    has_header: true,
-                    has_title: false,
-                    body: Container(),
-                    title: Container(
-                      margin: const EdgeInsets.only(left: 15, right: 15),
-                      child: text("Razón social"),
-                    ),
-                    header: Center(
-                      child: InputTextFormFields(
-                          inputBorder:
-                              OutlineInputBorder(borderSide: BorderSide.none),
+        body: SingleChildScrollView(
+            child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(children: <Widget>[
+                      SizedBox(height: 15),
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
                           accionCampo: TextInputAction.next,
-                          nombreCampo: "Ingrese su Razón social",
+                          nombreCampo: "Razón Social",
                           placeHolder: ""),
-                    ),
-                  ),
-                  // cuadro de texto cédula.
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("RUC"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Ingrese RUC",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Dirección"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Ingrese Dirección",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Telefono "),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Telefono",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Mail"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Mail",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Sitio Web"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Sitio Web",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Instagram"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Link o usuario de Instagram",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("X"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Link o usuario de X",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Linkedin"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Link de Linkedin",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Column(
-                    children: [
-                      HeaderContainer(
-                        height_container: 55,
-                        alignment_title: Alignment.centerLeft,
-                        has_header: true,
-                        has_title: false,
-                        body: Container(),
-                        title: Container(
-                          margin: const EdgeInsets.only(left: 15, right: 15),
-                          child: text("Facebook"),
-                        ),
-                        header: Center(
-                          child: InputTextFormFields(
-                              inputBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              accionCampo: TextInputAction.next,
-                              nombreCampo: "Link de Facebook",
-                              placeHolder: ""),
-                        ),
-                      ),
-                    ],
-                  ),
 
-                  /*TextFormField(
+                      SizedBox(height: 15),
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          accionCampo: TextInputAction.next,
+                          nombreCampo: "Ingrese RUC",
+                          placeHolder: ""),
+
+                      SizedBox(height: 15),
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          accionCampo: TextInputAction.next,
+                          nombreCampo: "Ingrese Dirección",
+                          placeHolder: ""),
+
+                      SizedBox(height: 15),
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          accionCampo: TextInputAction.next,
+                          nombreCampo: "Teléfono",
+                          placeHolder: ""),
+
+                      SizedBox(height: 15),
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          accionCampo: TextInputAction.next,
+                          nombreCampo: "Mail",
+                          placeHolder: ""),
+
+                      SizedBox(height: 15),
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          accionCampo: TextInputAction.next,
+                          nombreCampo: "Sitio Web",
+                          placeHolder: ""),
+
+                      SizedBox(height: 15),
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          accionCampo: TextInputAction.next,
+                          nombreCampo: "Link o usuario de Instagram",
+                          placeHolder: ""),
+
+                      SizedBox(height: 15),
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          accionCampo: TextInputAction.next,
+                          nombreCampo: "Link o usuario de X",
+                          placeHolder: ""),
+
+                      SizedBox(height: 15),
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          accionCampo: TextInputAction.next,
+                          nombreCampo: "Link de Linkedin",
+                          placeHolder: ""),
+
+                      InputTextFormFields(
+                          inputBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          accionCampo: TextInputAction.next,
+                          nombreCampo: "Link de Facebook",
+                          placeHolder: ""),
+
+                      /*TextFormField(
                     decoration:
                         InputDecoration(labelText: 'Nombre o razón social'),
                     onSaved: (value) => _empresa.razon_social = value ?? '',
@@ -335,23 +176,19 @@ class _FormEmpresaState extends State<FormEmpresa> {
                         : null,
                   ),*/
 
-                  // Agrega más campos aquí según sea necesario
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() == true) {
-                        _formKey.currentState?.save();
-                        // Aquí puedes hacer lo que necesites con los datos
-                        print(_empresa.toJson());
-                      }
-                    },
-                    child: Text('Guardar'),
+                      // Agrega más campos aquí según sea necesario
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState?.validate() == true) {
+                            _formKey.currentState?.save();
+                            // Aquí puedes hacer lo que necesites con los datos
+                            print(_empresa.toJson());
+                          }
+                        },
+                        child: Text('Guardar'),
+                      ),
+                    ]),
                   ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+                ))));
   }
 }

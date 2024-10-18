@@ -1,4 +1,5 @@
 import 'package:app_socios/src/view/inside/Home/lateralMenu/mi_perfil/form_contact_comer.dart';
+import 'package:app_socios/src/view/inside/Home/lateralMenu/mi_perfil/form_contact_pago.dart';
 import 'package:app_socios/utils/app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -33,35 +34,40 @@ class _FormcontactosState extends State<Formcontactos>
   Widget build(BuildContext context) {
     //El titulo de las vistas
     return Scaffold(
-        body: Container(
+        body: Column(children: [
+      Container(
+        height: 30,
+        decoration: BoxDecoration(
             color: Colors.white,
-            child: Column(children: [
-              TabBar(
-                indicator: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15))),
-                indicatorSize: TabBarIndicatorSize.tab,
-                labelColor: Colors.white,
-                controller: _tabController,
-                tabs: const <Widget>[
-                  Tab(
-                    text: ("Contacto comercial"),
-                  ),
-                  Tab(
-                    text: ("Contacto para pagos"),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: TabBarView(controller: _tabController, children: [
-                  ContacomercialForm(),
-                  Container(
-                    color: Colors.blue,
-                  ),
-                ]),
-              )
-            ])));
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25))),
+        child: /*Column(children: [*/
+            TabBar(
+          indicator: BoxDecoration(
+              color: Colors.grey.shade400,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15))),
+          indicatorSize: TabBarIndicatorSize.tab,
+          labelColor: Colors.white,
+          controller: _tabController,
+          tabs: const <Widget>[
+            Tab(
+              text: ("Contacto comercial"),
+            ),
+            Tab(
+              text: ("Contacto para pagos"),
+            ),
+          ],
+        ),
+      ),
+      Expanded(
+        child: TabBarView(controller: _tabController, children: [
+          ContacomercialForm(),
+          FormContactPago(),
+        ]),
+      )
+    ]));
   }
 }

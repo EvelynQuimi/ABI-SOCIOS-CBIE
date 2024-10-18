@@ -93,7 +93,7 @@ Drawer drawerMenu(context, {bool? inicio}) {
           ),
           leading: const Icon(Icons.person_2_outlined),
           children: [*/
-          dividerMenuLateral(),
+          //dividerMenuLateral(),
           ListTile(
             onTap: () {
               Navigator.push(

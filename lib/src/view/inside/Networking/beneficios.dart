@@ -79,8 +79,8 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
               inputBorder:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
               icon: const Icon(Icons.search),
-              placeHolder: "Buscar Establecimiento",
-              nombreCampo: "Buscar",
+              placeHolder: "Buscar",
+              nombreCampo: "Buscar Establecimiento ",
               accionCampo: TextInputAction.done),
           Expanded(
               child: cacheSocios.isEmpty

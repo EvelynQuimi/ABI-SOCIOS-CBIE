@@ -61,9 +61,12 @@ class _B_EmergenciaState extends State<B_Emergencia>
           child: Image.asset(
             "assets/boton-emergencia.png",
             fit: BoxFit.scaleDown,
-          ),
+          ), 
+               
         ),
       ),
+      
     );
+    
   }
 }

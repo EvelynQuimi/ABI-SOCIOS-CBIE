@@ -13,8 +13,7 @@ class MisDatos extends StatefulWidget {
   State<MisDatos> createState() => _MisDatosState();
 }
 
-class _MisDatosState extends State<MisDatos> 
-with TickerProviderStateMixin {
+class _MisDatosState extends State<MisDatos> with TickerProviderStateMixin {
   final keydatos = GlobalKey<ScaffoldState>();
   late final TabController _tabControllerdatos;
   late MyAppBar appBar;
@@ -36,6 +35,7 @@ with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     //El titulo de las vistas
     return Scaffold(
+        backgroundColor: Colors.white,
         key: keydatos,
         drawer: drawerMenu(context),
         body: NestedScrollView(
@@ -47,7 +47,9 @@ with TickerProviderStateMixin {
                       children: [
                         Icon(Abi_socios.misdatos_icono, size: 15),
                         SizedBox(width: 5),
-                        Text("Mis datos")
+                        Text(
+                          "Mis datos",
+                        ),
                       ],
                     ))
               ];
@@ -61,11 +63,10 @@ with TickerProviderStateMixin {
                     width: 110,
                     height: 110,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.white,
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: AssetImage(
-                            'assets/Logo-bg.png'), // Cambia la ruta según sea necesario
+                        image: AssetImage("assets/nesec-logo.png"),
                         fit: BoxFit.fill,
                       ),
                     ),

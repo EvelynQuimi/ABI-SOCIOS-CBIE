@@ -116,7 +116,9 @@ class HeaderContainer extends StatelessWidget {
         ),
         Align(
             alignment: alignment_title ?? Alignment.center,
-            child: title != null ? title! : Container())
+            child: title != null
+                ? Container(margin: EdgeInsets.only(bottom: 15), child: title!)
+                : Container())
       ],
     );
   }

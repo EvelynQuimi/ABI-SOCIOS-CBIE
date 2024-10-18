@@ -4,12 +4,12 @@ import 'package:app_socios/utils/header_container.dart';
 import 'package:app_socios/utils/textFields/input_text_form_fields.dart';
 import 'package:flutter/material.dart';
 
-class ContacomercialForm extends StatefulWidget {
+class FormContactPago extends StatefulWidget {
   @override
-  _ContacomercialFormState createState() => _ContacomercialFormState();
+  _FormContactPagoState createState() => _FormContactPagoState();
 }
 
-class _ContacomercialFormState extends State<ContacomercialForm> {
+class _FormContactPagoState extends State<FormContactPago> {
   final _formKey = GlobalKey<FormState>();
   final _comercial = ContactoModel(
     idContacto: 0,
