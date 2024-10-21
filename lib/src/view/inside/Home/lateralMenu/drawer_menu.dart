@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:app_socios/src/view/inside/Home/home_screen.dart';
 import 'package:app_socios/src/view/inside/Home/lateralMenu/mi_perfil/mis_datos.dart';
+import 'package:app_socios/src/view/inside/Home/screenlogin.dart';
 import 'package:app_socios/utils/alerts/and_alert.dart';
 import 'package:app_socios/utils/alerts/ios_alert.dart';
 import 'package:app_socios/utils/deviders/divider.dart';
@@ -319,25 +320,35 @@ Drawer drawerMenu(context, {bool? inicio}) {
                       flex: 3,
                       child: Align(
                         alignment: Alignment.centerRight,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              'CERRAR SESIÓN',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            Container(
-                                margin: const EdgeInsets.only(left: 10),
-                                child: const Icon(
-                                  Icons.logout,
+                        child: GestureDetector(
+                          onTap: () {
+                            // Navega a la pantalla de inicio de sesión
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => screenlogin()),
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text(
+                                'CERRAR SESIÓN',
+                                style: TextStyle(
                                   color: Colors.white,
-                                ))
-                          ],
+                                ),
+                              ),
+                              Container(
+                                  margin: const EdgeInsets.only(left: 10),
+                                  child: const Icon(
+                                    Icons.logout,
+                                    color: Colors.white,
+                                  ))
+                            ],
+                          ),
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               )),

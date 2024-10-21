@@ -18,6 +18,7 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
   late final TabController _tabController;
   late MyAppBar appBar;
   bool? hideb;
+  bool? hidesearch;
 
   @override
   void initState() {
@@ -41,6 +42,18 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
   void show() {
     setState(() {
       hideb = true;
+    });
+  }
+
+  void hidesearchb() {
+    setState(() {
+      hidesearch = false;
+    });
+  }
+
+  void showsearch() {
+    setState(() {
+      hidesearch = true;
     });
   }
 
@@ -92,6 +105,8 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
                   Socios(
                     hide: hide,
                     show: show,
+                    hidesearchb: hidesearchb,
+                    showsearch: showsearch,
                   ),
                   Beneficios_esta(
                     hide: hide,

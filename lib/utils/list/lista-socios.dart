@@ -11,6 +11,10 @@ List<Map<String, dynamic>> _sociosLista = [
     "descripcion":
         "Radio Caravana es una estación radial ecuatoriana en los 750 MHz del dial AM en Guayaquil",
     "contacto_comercial": "Grupo Caravana",
+    "instagram": "https://www.instagram.com/caravana750/",
+    "facebook": "https://www.facebook.com/radiocaravana/",
+    "sitio_web": "https://radiocaravana.com/",
+    "twitter": "https://x.com/Caravana750",
     "id": 1,
   },
   {
@@ -21,6 +25,8 @@ List<Map<String, dynamic>> _sociosLista = [
     "descripcion":
         "Una empresa comprometida con la excelencia en la producción de banano de la más alta calidad.",
     "contacto_comercial": "Vito Muñoz Ugarte",
+    "sitio_web": "https://donvitobananas.com/",
+    "facebook": "https://www.facebook.com/donvitobananas/?locale=es_LA",
     "id": 2,
   },
   {
@@ -31,6 +37,11 @@ List<Map<String, dynamic>> _sociosLista = [
     "descripcion":
         "Trabajar permanentemente para ofrecerte la mejor experiencia bancaria",
     "contacto_comercial": "Financiera del Sur S.A.",
+    "linkedin": "https://ec.linkedin.com/company/bancoguayaquil",
+    "instagram": " https://www.instagram.com/bancoguayaquil/?hl=es",
+    "facebook": "https://www.facebook.com/BancoGuayaquil/?locale=es_LA",
+    "sitio_web": "https://www.bancoguayaquil.com/",
+    "twitter": "https://x.com/banco_guayaquil",
     "id": 3,
   },
   {
@@ -41,6 +52,11 @@ List<Map<String, dynamic>> _sociosLista = [
     "descripcion":
         "Mall del Sol Shopping Center es un centro comercial ubicado en Guayaquil, Ecuador. Su construcción fue financiada por el grupo empresarial Pronobis y el grupo Wright",
     "contacto_comercial": "Pronobis",
+    "linkedin": "https://ec.linkedin.com/company/malldelsol",
+    "instagram": "https://www.instagram.com/malldelsol_ec/?hl=es",
+    "facebook": "https://www.facebook.com/MallDelSol/?locale=es_LA",
+    "sitio_web": " https://malldelsol.com.ec/",
+    "twitter": "https://x.com/malldelsol_ec",
     "id": 4,
   },
   {

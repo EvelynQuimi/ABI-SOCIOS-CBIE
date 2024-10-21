@@ -1,13 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
 
-/*import 'dart:io';
+import 'dart:io';
 
 import 'package:app_socios/utils/alerts/and_alert.dart';
 import 'package:app_socios/utils/alerts/ios_alert.dart';
 import 'package:app_socios/utils/flushBarGlobal.dart';
 import 'package:app_socios/utils/selectFile/previsualizacion.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SeleccionArchivos {
   //todo IMÁGENES
@@ -18,10 +21,8 @@ class SeleccionArchivos {
   //todo DOCUMENTOS
   List<PlatformFile>? _paths;
 
-  SeleccionArchivos(BuildContext context);
-
   Future<String?> selectOrCaptureImage(
-      BuildContext context, ImageSource imageSource,
+      ImageSource imageSource, BuildContext context,
       {CropAspectRatio? radio}) async {
     String? pathImage;
 
@@ -122,9 +123,3 @@ class SeleccionArchivos {
     return pathDoc!;
   }
 }
-
-class Permission {
-  static var storage;
-
-  static var camera;
-}*/

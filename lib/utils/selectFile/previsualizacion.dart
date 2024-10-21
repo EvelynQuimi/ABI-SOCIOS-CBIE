@@ -1,5 +1,5 @@
 // ignore_for_file: deprecated_member_use, must_be_immutable
-/*import 'dart:io';
+import 'dart:io';
 import 'package:app_socios/src/view/inside/Home/lateralMenu/drawer_menu.dart';
 import 'package:app_socios/utils/app_bar.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +28,10 @@ class _PreVisualizacionState extends State<PreVisualizacion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: key,
-      appBar: appBar.myAppBar(widgethide: Container()),
+      /*key: key,
+      appBar: appBar.MyAppBar(widgethide: Container()),
       drawer: drawerMenu(context),
-      /*persistentFooterButtons: [
+      persistentFooterButtons: [
               SizedBox(
                   height: 50,
                   width: double.infinity,
@@ -187,4 +187,4 @@ class _PreVisualizacionState extends State<PreVisualizacion> {
       });
     }
   }
-}*/
+}

@@ -1,9 +1,16 @@
+import 'package:app_socios/src/models/establecimiento_model.dart';
 import 'package:app_socios/src/models/usuario/empresa_model.dart';
+import 'package:app_socios/src/view/inside/Networking/data_list_estab.dart';
 import 'package:app_socios/utils/textFields/input_text_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 
 import '../../../../utils/list/lista-socios.dart';
+import 'package:card_loading/card_loading.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../utils/responsive.dart';
 
 class Beneficios_esta extends StatefulWidget {
   VoidCallback hide;
@@ -15,220 +22,330 @@ class Beneficios_esta extends StatefulWidget {
 }
 
 class _Beneficios_estaState extends State<Beneficios_esta> {
+  bool loading = false;
+  List<SubCategoriaModelo> subcategoriasFilter = [];
+  List<SubCategoriaModelo> backupSubCat = [];
+
   final _searchController = TextEditingController();
+  String searchText = "";
 
-  List<EmpresaModel> socios = [];
-  List<EmpresaModel> cacheSocios = [];
+  @override
+  void initState() {
+    super.initState();
+    newDataFiltering();
+  }
 
-  bool hasPermission = false;
-  bool showSector = false;
-
-  Future<void> getData() async {
-    var data = await sociosLista;
-    setState(() => socios = data.cast<EmpresaModel>());
-    setState(() => cacheSocios = socios);
-
-    @override
-    void initState() {
-      super.initState();
-      getData();
-    }
-
-    @override
-    Widget build(BuildContext context) {
-      return Container();
+  void newDataFiltering() {
+    for (var i = 0; i < listaCategorias.length; i++) {
+      if (listaCategorias[i].subcategorias != null) {
+        for (var x = 0; x < listaCategorias[i].subcategorias!.length; x++) {
+          subcategoriasFilter.add(listaCategorias[i].subcategorias![x]);
+          backupSubCat.add(listaCategorias[i].subcategorias![x]);
+          debugPrint("longitud de sub categorias: ${backupSubCat.length}");
+        }
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    return loading
+        ? builderLoadingData()
+        : Column(
+            children: [
+              const SizedBox(height: 10),
+              InputTextFields(
+                  onTap: () => widget.hide(),
+                  controlador: _searchController,
+                  onChanged: (value) {
+                    /*  setState(  => */ buildSearch(); //buildSearchList(value);
+                  },
+                  inputBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  icon: const Icon(Icons.search),
+                  placeHolder: "Buscar",
+                  nombreCampo: "Busqueda establecimiento",
+                  accionCampo: TextInputAction.done),
+              Expanded(
+                child: _searchController.text.isEmpty
+                    ? ListView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: loading ? 5 : listaCategorias.length,
+                        itemBuilder: (context, i) {
+                          return GestureDetector(
+                            //onTap: () => setState(() => loading = true),
+                            child: Container(
+                                margin: const EdgeInsets.only(top: 5),
+                                child: Column(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: SizedBox(
+                                        width: double.infinity,
+                                        height:
+                                            MediaQuery.of(context).size.width >
+                                                    250
+                                                ? 175
+                                                : 125,
+                                        child: SizedBox(
+                                          width: double.infinity,
+                                          height: 250,
+                                          child: Image.asset(
+                                            listaCategorias[i].fotoCategoria !=
+                                                    ""
+                                                ? listaCategorias[i]
+                                                    .fotoCategoria!
+                                                : "assets/banner-salud",
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Stack(children: [
+                                      listaCategorias[i]
+                                                  .subcategorias!
+                                                  .length ==
+                                              1
+                                          ? SizedBox(
+                                              width: double.infinity,
+                                              height: MediaQuery.of(context)
+                                                          .size
+                                                          .width >
+                                                      450
+                                                  ? 200
+                                                  : 150,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image.asset(
+                                                  listaCategorias[i]
+                                                              .subcategorias![0]
+                                                              .fotoCompraSubCategoria !=
+                                                          ''
+                                                      ? listaCategorias[i]
+                                                          .subcategorias![0]
+                                                          .fotoCompraSubCategoria!
+                                                      : "assets/no_image_otros.jpeg",
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ))
+                                          : SizedBox(
+                                              height: MediaQuery.of(context)
+                                                          .size
+                                                          .width >
+                                                      450
+                                                  ? 325
+                                                  : 200,
+                                              child: Swiper(
+                                                viewportFraction: 0.35,
+                                                scale: 0.85,
+                                                autoplay: false,
+                                                autoplayDelay: 3000,
+                                                pagination: const SwiperPagination(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    builder:
+                                                        DotSwiperPaginationBuilder(
+                                                            space: 5.0,
+                                                            color: Colors.white,
+                                                            activeColor:
+                                                                Colors.blue,
+                                                            size: 8),
+                                                    margin: EdgeInsets.only(
+                                                        top: 50)),
+                                                itemCount: listaCategorias[i]
+                                                    .subcategorias!
+                                                    .length,
+                                                loop: true,
+                                                itemBuilder: (context, index) {
+                                                  return GestureDetector(
+                                                    onTap: () {},
+                                                    child: SizedBox(
+                                                        height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width >
+                                                                450
+                                                            ? 300
+                                                            : 20,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          child: Image.asset(
+                                                            listaCategorias[i]
+                                                                        .subcategorias![
+                                                                            index]
+                                                                        .fotoCompraSubCategoria !=
+                                                                    ''
+                                                                ? listaCategorias[
+                                                                        i]
+                                                                    .subcategorias![
+                                                                        index]
+                                                                    .fotoCompraSubCategoria!
+                                                                : "assets/no_image_otros.jpeg",
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                        )),
+                                                  );
+
+                                                  //return
+                                                },
+                                              ))
+                                    ]),
+                                  ],
+                                )),
+                          );
+                        })
+                    : GridView.builder(
+                        padding: EdgeInsets.zero,
+                        itemCount: subcategoriasFilter.length,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            // height: 50,
+                            child: Stack(
+                              //mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Image.asset(
+                                  subcategoriasFilter[index]
+                                              .fotoCompraSubCategoria !=
+                                          ''
+                                      ? subcategoriasFilter[index]
+                                          .fotoCompraSubCategoria!
+                                      : "assets/no_image_otros.jpeg",
+                                  fit: BoxFit.fill,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 200,
+                                childAspectRatio: 0.67,
+                                crossAxisSpacing: 5,
+                                mainAxisSpacing: 5),
+                      ),
+              ),
+              SizedBox(height: 15)
+            ],
+          );
+  }
+
+  Widget builderLoadingData() {
+    final rsp = Responsive.of(context);
     return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-        widget.show();
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        //key: _sckey,
-        body: Column(
+      onTap: () => setState(() => loading = false),
+      child: Container(
+        margin: const EdgeInsets.only(top: 5),
+        child: ListView(
+          padding: EdgeInsets.zero,
           children: [
-            Expanded(
-              child: Stack(
+            CardLoading(
+              animationDuration: Duration(milliseconds: 1200),
+              borderRadius: BorderRadius.circular(10),
+              height: MediaQuery.of(context).size.width > 250 ? 100 : 50,
+              width: double.infinity,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SizedBox(
+              height: 200,
+              child: GridView(
+                scrollDirection: Axis.horizontal,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 1.5,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 10),
                 children: [
-                  Container(
-                    child: options(),
+                  CardLoading(
+                    margin: EdgeInsets.only(top: 7, bottom: 7),
+                    animationDuration: const Duration(milliseconds: 1200),
+                    borderRadius: BorderRadius.circular(10),
+                    height: 200,
+                    width: rsp.wp(32),
+                  ),
+                  CardLoading(
+                    borderRadius: BorderRadius.circular(10),
+                    animationDuration: const Duration(milliseconds: 1200),
+                    height: 200,
+                    width: rsp.wp(32),
+                  ),
+                  CardLoading(
+                    margin: EdgeInsets.only(top: 7, bottom: 7),
+                    animationDuration: const Duration(milliseconds: 1200),
+                    borderRadius: BorderRadius.circular(10),
+                    height: 200,
+                    width: rsp.wp(32),
                   ),
                 ],
               ),
             ),
+            const SizedBox(height: 5),
+            CardLoading(
+              animationDuration: Duration(milliseconds: 1200),
+              borderRadius: BorderRadius.circular(10),
+              height: MediaQuery.of(context).size.width > 250 ? 100 : 50,
+              width: double.infinity,
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SizedBox(
+              height: 200,
+              child: GridView(
+                scrollDirection: Axis.horizontal,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 1.5,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 10),
+                children: [
+                  CardLoading(
+                    borderRadius: BorderRadius.circular(10),
+                    animationDuration: const Duration(milliseconds: 1200),
+                    height: 200,
+                    width: rsp.wp(32),
+                  ),
+                  CardLoading(
+                    borderRadius: BorderRadius.circular(10),
+                    animationDuration: const Duration(milliseconds: 1200),
+                    height: 200,
+                    width: rsp.wp(32),
+                  ),
+                  CardLoading(
+                    borderRadius: BorderRadius.circular(10),
+                    animationDuration: const Duration(milliseconds: 1200),
+                    height: 200,
+                    width: rsp.wp(32),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
     );
   }
 
-  Widget options() => Column(
-        children: [
-          const SizedBox(height: 10),
-          InputTextFields(
-              onTap: () => widget.hide(),
-              controlador: _searchController,
-              onChanged: (value) {
-                setState(() => buildSearchList(value));
-              },
-              inputBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
-              icon: const Icon(Icons.search),
-              placeHolder: "Buscar",
-              nombreCampo: "Buscar Establecimiento ",
-              accionCampo: TextInputAction.done),
-          Expanded(
-              child: cacheSocios.isEmpty
-                  ? SingleChildScrollView(
-                      child: Column(
-                      children: [
-                        SizedBox(
-                          child: Image.asset("assets/nesec-logo.png"),
-                        ),
-                      ],
-                    ))
-                  : ListView.builder(
-                      itemCount: cacheSocios.length,
-                      itemBuilder: (context, index) {
-                        String initial = "";
-                        if (cacheSocios[index].razon_social != "") {
-                          initial =
-                              cacheSocios[index].razon_social.split("")[0];
-                          return Slidable(
-                            key: UniqueKey(),
-                            startActionPane: ActionPane(
-                                motion: const ScrollMotion(), children: []),
-                            child: InkWell(
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                    top: 10, bottom: 10, left: 20, right: 10),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 40,
-                                      height: 40,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey.shade800,
-                                                blurRadius: 1.1,
-                                                offset: const Offset(0, 0),
-                                                spreadRadius: 0.5)
-                                          ],
-                                          color: Colors.black,
-                                          borderRadius:
-                                              BorderRadius.circular(100)),
-                                      child: Text(
-                                        initial,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                    ),
-                                    Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              width: double.infinity,
-                                              margin: const EdgeInsets.only(
-                                                  left: 15),
-                                              child: Text(
-                                                //"${contacts[index].nombres.split(" ")[0]} ${contacts[index].nombres.split(" ")[2]}",
-                                                // "${cacheContacts[index].nombres.split(" ")[0]} ${cacheContacts[index].nombres.split(" ")[2] ?? ""}",
-                                                getNameEmpresa(
-                                                    cacheSocios[index]
-                                                        .razon_social
-                                                        .toUpperCase()),
-                                                style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            if (showSector)
-                                              Container(
-                                                margin: const EdgeInsets.only(
-                                                    left: 15),
-                                                width: double.infinity,
-                                                child: Text(
-                                                  cacheSocios[index]
-                                                          .tipo_empresa ??
-                                                      "",
-                                                  style:
-                                                      TextStyle(fontSize: 11),
-                                                ),
-                                              )
-                                          ],
-                                        )),
-                                    const Icon(Icons.navigate_next_outlined)
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      }))
-        ],
-      );
-
-  String getNameEmpresa(String name) {
-    final list = name.split(" ");
-
-    switch (list.length) {
-      case 5:
-        {
-          return "${list[0]} ${list[1]} ${list[2]}";
-        }
-      case 4:
-        {
-          return "${list[0]} ${list[2]}";
-        }
-      case 3:
-        {
-          return "${list[0]} ${list[2]}";
-        }
-      case 2:
-        {
-          return "${list[0]} ${list[1]}";
-        }
-      case 1:
-        {
-          return list[0];
-        }
-      default:
-        return "";
-    }
-  }
-
-  List<EmpresaModel> buildSearchList(String value) {
-    List<EmpresaModel> sociosLista = [];
-
-    if (value.isNotEmpty) {
-      setState(() => showSector = true);
-      var filter = socios
-          .where((e) =>
-              (e.razon_social.toLowerCase().contains(value.toLowerCase())) ||
-              (e.ruc!.toLowerCase().contains(value.toLowerCase())))
-          .toList();
-
-      setState(() => sociosLista = filter);
-      setState(() => cacheSocios = sociosLista);
+  List<SubCategoriaModelo> buildSearch() {
+    if (searchText.isEmpty) {
+      return subcategoriasFilter = backupSubCat;
     } else {
-      setState(() => showSector = false);
-      setState(() => cacheSocios = socios);
-      setState(() => socios = socios);
+      setState(() {
+        subcategoriasFilter = backupSubCat
+            .where((element) => element.nombreCompraSubCategoria!
+                .toLowerCase()
+                .contains(searchText.toLowerCase()))
+            .toList();
+      });
+      debugPrint("LONGITUD SEARCH: ${subcategoriasFilter.length}");
+      return subcategoriasFilter;
     }
-
-    return sociosLista;
   }
 }
