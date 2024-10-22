@@ -1,5 +1,6 @@
 import 'package:app_socios/src/models/establecimiento_model.dart';
 import 'package:app_socios/src/models/usuario/empresa_model.dart';
+import 'package:app_socios/src/view/inside/Home/home_screen.dart';
 import 'package:app_socios/src/view/inside/Networking/data_list_estab.dart';
 import 'package:app_socios/utils/textFields/input_text_fields.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,14 @@ import '../../../../utils/responsive.dart';
 class Beneficios_esta extends StatefulWidget {
   VoidCallback hide;
   VoidCallback show;
-  Beneficios_esta({super.key, required this.hide, required this.show});
+  VoidCallback hidesearchb;
+  VoidCallback showsearch;
+  Beneficios_esta(
+      {super.key,
+      required this.hide,
+      required this.show,
+      required this.hidesearchb,
+      required this.showsearch});
 
   @override
   State<Beneficios_esta> createState() => _Beneficios_estaState();
@@ -26,8 +34,17 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
   List<SubCategoriaModelo> subcategoriasFilter = [];
   List<SubCategoriaModelo> backupSubCat = [];
 
+  bool showDetail = false;
+  Map<String, dynamic>? establecimiento;
+
   final _searchController = TextEditingController();
   String searchText = "";
+
+  Future<void> getData() async {
+    setState(
+        () => subcategoriasFilter = listaCategorias.cast<SubCategoriaModelo>());
+    setState(() => backupSubCat = subcategoriasFilter);
+  }
 
   @override
   void initState() {
@@ -55,7 +72,9 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
             children: [
               const SizedBox(height: 10),
               InputTextFields(
-                  onTap: () => widget.hide(),
+                  onTap: () {
+                    widget.hide();
+                  },
                   controlador: _searchController,
                   onChanged: (value) {
                     /*  setState(  => */ buildSearch(); //buildSearchList(value);
@@ -67,19 +86,27 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
                   nombreCampo: "Busqueda establecimiento",
                   accionCampo: TextInputAction.done),
               Expanded(
-                child: _searchController.text.isEmpty
+                child: showDetail == false //_searchController.text.isEmpty
                     ? ListView.builder(
                         padding: EdgeInsets.zero,
                         itemCount: loading ? 5 : listaCategorias.length,
                         itemBuilder: (context, i) {
                           return GestureDetector(
-                            //onTap: () => setState(() => loading = true),
+                            onTap: () {
+                              setState(() {
+                                showDetail = true;
+                                loading = true;
+                                establecimiento =
+                                    listaCategorias[i] as Map<String, dynamic>?;
+                              });
+                              widget.hidesearchb();
+                            },
                             child: Container(
                                 margin: const EdgeInsets.only(top: 5),
                                 child: Column(
                                   children: [
                                     ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(25),
                                       child: SizedBox(
                                         width: double.infinity,
                                         height:
@@ -102,49 +129,51 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
                                       ),
                                     ),
                                     const SizedBox(
-                                      height: 5,
+                                      height: 3,
                                     ),
-                                    Stack(children: [
-                                      listaCategorias[i]
-                                                  .subcategorias!
-                                                  .length ==
-                                              1
-                                          ? SizedBox(
-                                              width: double.infinity,
-                                              height: MediaQuery.of(context)
-                                                          .size
-                                                          .width >
-                                                      450
-                                                  ? 200
-                                                  : 150,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Image.asset(
-                                                  listaCategorias[i]
-                                                              .subcategorias![0]
-                                                              .fotoCompraSubCategoria !=
-                                                          ''
-                                                      ? listaCategorias[i]
-                                                          .subcategorias![0]
-                                                          .fotoCompraSubCategoria!
-                                                      : "assets/no_image_otros.jpeg",
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ))
-                                          : SizedBox(
-                                              height: MediaQuery.of(context)
-                                                          .size
-                                                          .width >
-                                                      450
-                                                  ? 325
-                                                  : 200,
-                                              child: Swiper(
-                                                viewportFraction: 0.35,
-                                                scale: 0.85,
-                                                autoplay: false,
-                                                autoplayDelay: 3000,
-                                                pagination: const SwiperPagination(
+                                    Padding(
+                                      padding: const EdgeInsets.all(8),
+                                      child: Stack(children: [
+                                        listaCategorias[i]
+                                                    .subcategorias!
+                                                    .length ==
+                                                1
+                                            ? SizedBox(
+                                                width: double.infinity,
+                                                height: 150,
+                                                /* MediaQuery.of(context)
+                                                            .size
+                                                            .width >
+                                                        450
+                                                    ? 200 */
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  child: Image.asset(
+                                                    listaCategorias[i]
+                                                                .subcategorias![
+                                                                    0]
+                                                                .fotoCompraSubCategoria !=
+                                                            ''
+                                                        ? listaCategorias[i]
+                                                            .subcategorias![0]
+                                                            .fotoCompraSubCategoria!
+                                                        : "assets/no_image_otros.jpeg",
+                                                    fit: BoxFit.fill,
+                                                    height: 5,
+                                                    width: 5,
+                                                  ),
+                                                ))
+                                            : SizedBox(
+                                                height:
+                                                    185, //Todo tamaño de contenedor de carrusel
+                                                child: Swiper(
+                                                  viewportFraction: 0.35,
+                                                  scale: 0.85,
+                                                  autoplay: false,
+                                                  autoplayDelay: 3000,
+                                                  pagination:
+                                                      const SwiperPagination(
                                                     alignment:
                                                         Alignment.bottomCenter,
                                                     builder:
@@ -152,50 +181,90 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
                                                             space: 5.0,
                                                             color: Colors.white,
                                                             activeColor:
-                                                                Colors.blue,
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    247,
+                                                                    101,
+                                                                    28),
                                                             size: 8),
                                                     margin: EdgeInsets.only(
-                                                        top: 50)),
-                                                itemCount: listaCategorias[i]
-                                                    .subcategorias!
-                                                    .length,
-                                                loop: true,
-                                                itemBuilder: (context, index) {
-                                                  return GestureDetector(
-                                                    onTap: () {},
-                                                    child: SizedBox(
-                                                        height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width >
-                                                                450
-                                                            ? 300
-                                                            : 20,
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          child: Image.asset(
-                                                            listaCategorias[i]
-                                                                        .subcategorias![
-                                                                            index]
-                                                                        .fotoCompraSubCategoria !=
-                                                                    ''
-                                                                ? listaCategorias[
-                                                                        i]
-                                                                    .subcategorias![
-                                                                        index]
-                                                                    .fotoCompraSubCategoria!
-                                                                : "assets/no_image_otros.jpeg",
-                                                            fit: BoxFit.fill,
-                                                          ),
-                                                        )),
-                                                  );
+                                                        top: 50),
+                                                  ),
+                                                  itemCount: listaCategorias[i]
+                                                      .subcategorias!
+                                                      .length,
+                                                  loop: true,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return GestureDetector(
+                                                      onTap: () {},
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                            color: Colors
+                                                                .grey.shade300,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10)),
+                                                        height: 15,
+                                                        child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Expanded(
+                                                                flex: 3,
+                                                                child:
+                                                                    ClipRRect(
+                                                                  child: Image
+                                                                      .asset(
+                                                                    listaCategorias[i].subcategorias![index].fotoCompraSubCategoria !=
+                                                                            ''
+                                                                        ? listaCategorias[i]
+                                                                            .subcategorias![index]
+                                                                            .fotoCompraSubCategoria!
+                                                                        : "assets/no_image_otros.jpeg",
+                                                                    fit: BoxFit
+                                                                        .contain,
+                                                                    height: 50,
+                                                                    width:
+                                                                        80, //Todo tamaño de los iconos
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                flex: 3,
+                                                                child: Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                          .all(
+                                                                          10.0), // Todo Espaciado entre la imagen y el texto
+                                                                  child: Center(
+                                                                      child: Text(
+                                                                          textAlign: TextAlign.center,
+                                                                          /*  "Descripción de beneficios" */ listaCategorias[i].subcategorias![index].descripcion_completa_ben, // Asegúrate de que este campo exista
+                                                                          style: TextStyle(
+                                                                            fontSize:
+                                                                                12,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: const Color.fromARGB(
+                                                                                223,
+                                                                                101,
+                                                                                101,
+                                                                                101), // Todo color de texto
 
-                                                  //return
-                                                },
-                                              ))
-                                    ]),
+                                                                            // Cambia el color según tus preferencias
+                                                                          ))),
+                                                                ),
+                                                              ),
+                                                            ]),
+                                                      ),
+                                                    ); //return
+                                                  },
+                                                ))
+                                      ]),
+                                    ),
                                   ],
                                 )),
                           );

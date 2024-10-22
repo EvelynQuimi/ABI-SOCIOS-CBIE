@@ -111,6 +111,8 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
                   Beneficios_esta(
                     hide: hide,
                     show: show,
+                    hidesearchb: hidesearchb,
+                    showsearch: showsearch,
                   ),
                 ]),
               )

@@ -87,7 +87,7 @@ class _SociosState extends State<Socios> {
   Widget options() => Column(
         children: [
           SizedBox(height: 10),
-          if (!showDetail)
+          if (!showDetail) //ocultar el searchbar 
             InputTextFields(
                 onTap: () {
                   widget.hide();
@@ -109,7 +109,7 @@ class _SociosState extends State<Socios> {
             },
           ), */
           Expanded(
-              child: showDetail == false
+              child: showDetail == false // buscador de los detalles para ocultarlo
                   ? ListView.builder(
                       //itemExtent: 100,
                       itemCount: cacheSocios.length,
