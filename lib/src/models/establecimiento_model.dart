@@ -2,7 +2,7 @@ class CategoriasModelo {
   int? idCompraCategoria;
   String? nombreCompraCategoria;
   String? fotoCategoria;
-  
+
   List<SubCategoriaModelo> subcategorias = [];
 
   CategoriasModelo({
@@ -14,10 +14,11 @@ class CategoriasModelo {
 
   factory CategoriasModelo.fromJson(Map<String, dynamic> json) {
     return CategoriasModelo(
-        fotoCategoria: json["fotoCategoria"],
-        idCompraCategoria: json["idCompraCategoria"],
-        nombreCompraCategoria: json["nombreCompraCategoria"],
-        subcategorias: json["subcategorias"]);
+      fotoCategoria: json["fotoCategoria"],
+      idCompraCategoria: json["idCompraCategoria"],
+      nombreCompraCategoria: json["nombreCompraCategoria"],
+      subcategorias: json["subcategorias"],
+    );
   }
 }
 
@@ -28,7 +29,8 @@ class SubCategoriaModelo {
   int? idCategoria;
   String descripcion_completa_ben;
   String latitud;
-  String altitud;
+  String longitud;
+  String descripcionesta;
 
   SubCategoriaModelo({
     required this.fotoCompraSubCategoria,
@@ -36,18 +38,21 @@ class SubCategoriaModelo {
     this.idCompraSubCategoria,
     required this.nombreCompraSubCategoria,
     required this.descripcion_completa_ben,
-    required this.altitud,
+    required this.longitud,
     required this.latitud,
+    required this.descripcionesta,
   });
 
   factory SubCategoriaModelo.fromJson(Map<String, dynamic> json) {
     return SubCategoriaModelo(
-        fotoCompraSubCategoria: json["fotoCompraSubCategoria"],
-        idCategoria: json["idCategoria"],
-        idCompraSubCategoria: json["idCompraSubCategoria"],
-        nombreCompraSubCategoria: json["nombreCompraSubCategoria"],
-        descripcion_completa_ben: json["descripcion_completa_ben"],
-        latitud: json["latitud"],
-        altitud: json["altitud"]);
+      fotoCompraSubCategoria: json["fotoCompraSubCategoria"],
+      idCategoria: json["idCategoria"],
+      idCompraSubCategoria: json["idCompraSubCategoria"],
+      nombreCompraSubCategoria: json["nombreCompraSubCategoria"],
+      descripcion_completa_ben: json["descripcion_completa_ben"],
+      latitud: json["latitud"],
+      longitud: json["longitud"],
+      descripcionesta: json["descripcionesta"],
+    );
   }
 }

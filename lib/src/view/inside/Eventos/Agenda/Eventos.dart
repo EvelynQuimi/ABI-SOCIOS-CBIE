@@ -100,16 +100,19 @@ class _EventosState extends State<Eventos> with TickerProviderStateMixin {
       headerSliverBuilder: (context, val) {
         return [
           appBar.mySliverAppBar(context,
+              mostrar: true,
               widgethide: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Abi_socios.agenda_icono, color: Colors.black),
                   SizedBox(width: 5),
-                  Text("Eventos",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.black))
+                  Text(
+                    "Eventos",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.black),
+                  ),
                 ],
               ))
         ];

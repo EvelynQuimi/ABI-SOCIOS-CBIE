@@ -34,9 +34,6 @@ class Socios extends StatefulWidget {
 class _SociosState extends State<Socios> {
   final _searchController = TextEditingController();
 
-  /*  List<EmpresaModel> socios = [];
-  List<EmpresaModel> cacheSocios = []; */
-
   List<Map<String, dynamic>> socios = [];
   List<Map<String, dynamic>> cacheSocios = [];
 
@@ -87,7 +84,7 @@ class _SociosState extends State<Socios> {
   Widget options() => Column(
         children: [
           SizedBox(height: 10),
-          if (!showDetail) //ocultar el searchbar 
+          if (!showDetail) //ocultar el searchbar
             InputTextFields(
                 onTap: () {
                   widget.hide();
@@ -109,31 +106,32 @@ class _SociosState extends State<Socios> {
             },
           ), */
           Expanded(
-              child: showDetail == false // buscador de los detalles para ocultarlo
-                  ? ListView.builder(
-                      //itemExtent: 100,
-                      itemCount: cacheSocios.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.only(top: 15),
-                          width: 180,
-                          height: 180,
-                          child: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                showDetail = true;
-                                empresa = cacheSocios[index];
-                              });
-                              widget.hidesearchb();
-                            },
-                            child: Image.asset(
-                              cacheSocios[index]["asset"],
-                            ),
-                          ),
-                        );
-                      },
-                    )
-                  : detalles(empresa: empresa!))
+              child:
+                  showDetail == false // buscador de los detalles para ocultarlo
+                      ? ListView.builder(
+                          //itemExtent: 100,
+                          itemCount: cacheSocios.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: EdgeInsets.only(top: 15),
+                              width: 180,
+                              height: 180,
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    showDetail = true;
+                                    empresa = cacheSocios[index];
+                                  });
+                                  widget.hidesearchb();
+                                },
+                                child: Image.asset(
+                                  cacheSocios[index]["asset"],
+                                ),
+                              ),
+                            );
+                          },
+                        )
+                      : detalles(empresa: empresa!))
         ],
       );
 

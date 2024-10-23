@@ -7,6 +7,7 @@ import 'package:insta_assets_picker/insta_assets_picker.dart';
 import 'package:path/path.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 import '../src/view/inside/Home/crop_result_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyAppBar extends Widget with InstaPickerInterface {
   GlobalKey<ScaffoldState> key;
@@ -16,7 +17,10 @@ class MyAppBar extends Widget with InstaPickerInterface {
   ThemeData themeData = ThemeData();
 
   SliverAppBar mySliverAppBar(BuildContext context,
-          {required Widget widgethide, bool? action, bool? hide}) =>
+          {required Widget widgethide,
+          bool? action,
+          bool? hide,
+          bool? mostrar}) =>
       SliverAppBar(
           automaticallyImplyLeading: false,
           toolbarHeight: 85,
@@ -63,7 +67,7 @@ class MyAppBar extends Widget with InstaPickerInterface {
                 if (action != null && action)
                   Positioned(
                     bottom: 10,
-                    right: 17,
+                    right: 25,
                     child: IconButton(
                         icon: const Icon(
                           Abi_socios.agregar, //Icono de subir post
@@ -74,10 +78,44 @@ class MyAppBar extends Widget with InstaPickerInterface {
                 if (action != null && action)
                   Positioned(
                       bottom: 10,
-                      right: -12,
+                      right: -5,
                       child: IconButton(
                           icon: const Icon(
                               Abi_socios.campanita, //icono de notificaciones
+                              size: 15,
+                              color: Colors.black),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (builder) =>
+                                      NotificacionesScreen(context))))),
+                if (mostrar != null && mostrar)
+                  Positioned(
+                      bottom: 10,
+                      right: 25,
+                      child: IconButton(
+                          tooltip: "Galeria",
+                          icon: const Icon(
+                              Abi_socios
+                                  .galeria_icono, //icono de notificaciones
+                              size: 15,
+                              color: Colors.black),
+                          onPressed: () async {
+                            const url =
+                                'https://www.ecuadoritalia.com/galerria';
+                            if (await canLaunch(url)) {
+                              await launch(url);
+                            } else {
+                              throw 'No se pudo abrir $url';
+                            }
+                          })),
+                if (mostrar != null && mostrar)
+                  Positioned(
+                      bottom: 10,
+                      right: -5,
+                      child: IconButton(
+                          icon: const Icon(
+                              Abi_socios.agenda_icono, //icono de notificaciones
                               size: 15,
                               color: Colors.black),
                           onPressed: () => Navigator.push(

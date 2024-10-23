@@ -35,16 +35,10 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
   List<SubCategoriaModelo> backupSubCat = [];
 
   bool showDetail = false;
-  Map<String, dynamic>? establecimiento;
+  SubCategoriaModelo? establecimiento;
 
   final _searchController = TextEditingController();
   String searchText = "";
-
-  Future<void> getData() async {
-    setState(
-        () => subcategoriasFilter = listaCategorias.cast<SubCategoriaModelo>());
-    setState(() => backupSubCat = subcategoriasFilter);
-  }
 
   @override
   void initState() {
@@ -55,9 +49,9 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
   void newDataFiltering() {
     for (var i = 0; i < listaCategorias.length; i++) {
       if (listaCategorias[i].subcategorias != null) {
-        for (var x = 0; x < listaCategorias[i].subcategorias!.length; x++) {
-          subcategoriasFilter.add(listaCategorias[i].subcategorias![x]);
-          backupSubCat.add(listaCategorias[i].subcategorias![x]);
+        for (var x = 0; x < listaCategorias[i].subcategorias.length; x++) {
+          subcategoriasFilter.add(listaCategorias[i].subcategorias[x]);
+          backupSubCat.add(listaCategorias[i].subcategorias[x]);
           debugPrint("longitud de sub categorias: ${backupSubCat.length}");
         }
       }
@@ -66,242 +60,306 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
 
   @override
   Widget build(BuildContext context) {
-    return loading
+    return /*loading
         ? builderLoadingData()
-        : Column(
-            children: [
-              const SizedBox(height: 10),
-              InputTextFields(
-                  onTap: () {
-                    widget.hide();
-                  },
-                  controlador: _searchController,
-                  onChanged: (value) {
-                    /*  setState(  => */ buildSearch(); //buildSearchList(value);
-                  },
-                  inputBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15)),
-                  icon: const Icon(Icons.search),
-                  placeHolder: "Buscar",
-                  nombreCampo: "Busqueda establecimiento",
-                  accionCampo: TextInputAction.done),
-              Expanded(
-                child: showDetail == false //_searchController.text.isEmpty
-                    ? ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: loading ? 5 : listaCategorias.length,
-                        itemBuilder: (context, i) {
-                          return GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                showDetail = true;
-                                loading = true;
-                                establecimiento =
-                                    listaCategorias[i] as Map<String, dynamic>?;
-                              });
-                              widget.hidesearchb();
-                            },
-                            child: Container(
-                                margin: const EdgeInsets.only(top: 5),
-                                child: Column(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
+        : */
+        Column(
+      children: [
+        const SizedBox(height: 10),
+        Container(
+          child: InputTextFields(
+              controlador: _searchController,
+              inputBorder:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+              placeHolder: "Buscar",
+              nombreCampo: "Busqueda establecimiento",
+              //accionCampo: TextInputAction.done,
+              onChanged: (value) {
+                setState(() => searchText = value);
+                buildSearch();
+              },
+              icon: const Icon(Icons.search),
+              suffixIcon: _searchController.text.isEmpty
+                  ? null
+                  : IconButton(
+                      onPressed: () {
+                        buildSearch();
+                        setState(() => _searchController.clear());
+                      },
+                      icon: const Icon(
+                        Icons.clear,
+                        color: Colors.black,
+                      )),
+              accionCampo: TextInputAction.done),
+        ),
+        Expanded(
+          child: showDetail
+              ? detallesbeneficios(establecimiento: establecimiento!)
+              : _searchController.text.isEmpty //_searchController.text.isEmpty
+                  ? ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: loading ? 5 : listaCategorias.length,
+                      itemBuilder: (context, i) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              showDetail = true;
+
+                              loading = true;
+                            });
+                            widget.hidesearchb();
+                          },
+                          child: Container(
+                              margin: const EdgeInsets.only(top: 5),
+                              child: Column(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(25),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      height:
+                                          MediaQuery.of(context).size.width >
+                                                  250
+                                              ? 200
+                                              : 100,
                                       child: SizedBox(
                                         width: double.infinity,
-                                        height:
-                                            MediaQuery.of(context).size.width >
-                                                    250
-                                                ? 175
-                                                : 125,
-                                        child: SizedBox(
-                                          width: double.infinity,
-                                          height: 250,
-                                          child: Image.asset(
-                                            listaCategorias[i].fotoCategoria !=
-                                                    ""
-                                                ? listaCategorias[i]
-                                                    .fotoCategoria!
-                                                : "assets/banner-salud",
-                                            fit: BoxFit.fill,
-                                          ),
+                                        height: 150,
+                                        child: Image.asset(
+                                          listaCategorias[i].fotoCategoria != ""
+                                              ? listaCategorias[i]
+                                                  .fotoCategoria!
+                                              : "assets/banner-salud",
+                                          fit: BoxFit.fill,
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 3,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8),
-                                      child: Stack(children: [
-                                        listaCategorias[i]
-                                                    .subcategorias!
-                                                    .length ==
-                                                1
-                                            ? SizedBox(
-                                                width: double.infinity,
-                                                height: 150,
-                                                /* MediaQuery.of(context)
+                                  ),
+                                  const SizedBox(
+                                    height: 3,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Stack(children: [
+                                      listaCategorias[i].subcategorias.length ==
+                                              1
+                                          ? SizedBox(
+                                              width: double.infinity,
+                                              height: 150,
+                                              /* MediaQuery.of(context)
                                                             .size
                                                             .width >
                                                         450
-                                                    ? 200 */
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                  child: Image.asset(
-                                                    listaCategorias[i]
-                                                                .subcategorias![
-                                                                    0]
-                                                                .fotoCompraSubCategoria !=
-                                                            ''
-                                                        ? listaCategorias[i]
-                                                            .subcategorias![0]
-                                                            .fotoCompraSubCategoria!
-                                                        : "assets/no_image_otros.jpeg",
-                                                    fit: BoxFit.fill,
-                                                    height: 5,
-                                                    width: 5,
-                                                  ),
-                                                ))
-                                            : SizedBox(
-                                                height:
-                                                    185, //Todo tamaño de contenedor de carrusel
-                                                child: Swiper(
-                                                  viewportFraction: 0.35,
-                                                  scale: 0.85,
-                                                  autoplay: false,
-                                                  autoplayDelay: 3000,
-                                                  pagination:
-                                                      const SwiperPagination(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    builder:
-                                                        DotSwiperPaginationBuilder(
-                                                            space: 5.0,
-                                                            color: Colors.white,
-                                                            activeColor:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    247,
-                                                                    101,
-                                                                    28),
-                                                            size: 8),
-                                                    margin: EdgeInsets.only(
-                                                        top: 50),
-                                                  ),
-                                                  itemCount: listaCategorias[i]
-                                                      .subcategorias!
-                                                      .length,
-                                                  loop: true,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return GestureDetector(
-                                                      onTap: () {},
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                            color: Colors
-                                                                .grey.shade300,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10)),
-                                                        height: 15,
-                                                        child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Expanded(
-                                                                flex: 3,
-                                                                child:
-                                                                    ClipRRect(
-                                                                  child: Image
-                                                                      .asset(
-                                                                    listaCategorias[i].subcategorias![index].fotoCompraSubCategoria !=
-                                                                            ''
-                                                                        ? listaCategorias[i]
-                                                                            .subcategorias![index]
-                                                                            .fotoCompraSubCategoria!
-                                                                        : "assets/no_image_otros.jpeg",
-                                                                    fit: BoxFit
-                                                                        .contain,
-                                                                    height: 50,
-                                                                    width:
-                                                                        80, //Todo tamaño de los iconos
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                flex: 3,
-                                                                child: Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                          .all(
-                                                                          10.0), // Todo Espaciado entre la imagen y el texto
-                                                                  child: Center(
-                                                                      child: Text(
-                                                                          textAlign: TextAlign.center,
-                                                                          /*  "Descripción de beneficios" */ listaCategorias[i].subcategorias![index].descripcion_completa_ben, // Asegúrate de que este campo exista
-                                                                          style: TextStyle(
-                                                                            fontSize:
-                                                                                12,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            color: const Color.fromARGB(
-                                                                                223,
-                                                                                101,
-                                                                                101,
-                                                                                101), // Todo color de texto
+                                                     200 */
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                child: Image.asset(
+                                                  listaCategorias[i]
+                                                              .subcategorias[0]
+                                                              .fotoCompraSubCategoria !=
+                                                          ''
+                                                      ? listaCategorias[i]
+                                                          .subcategorias[0]
+                                                          .fotoCompraSubCategoria
+                                                      : "assets/no_image_otros.jpeg",
+                                                  fit: BoxFit.fill,
+                                                  height: 100,
+                                                  width: 100,
+                                                ),
+                                              ))
+                                          : SizedBox(
+                                              height:
+                                                  185, //Todo tamaño de contenedor de carrusel
+                                              child: Swiper(
+                                                viewportFraction: 0.35,
+                                                scale: 0.85,
+                                                autoplay: false,
+                                                autoplayDelay: 3000,
+                                                pagination:
+                                                    const SwiperPagination(
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                  builder:
+                                                      DotSwiperPaginationBuilder(
+                                                          space: 5.0,
+                                                          color: Colors.white,
+                                                          activeColor:
+                                                              Color.fromARGB(
+                                                                  255,
+                                                                  247,
+                                                                  101,
+                                                                  28),
+                                                          size: 8),
+                                                  margin:
+                                                      EdgeInsets.only(top: 50),
+                                                ),
+                                                itemCount: listaCategorias[i]
+                                                    .subcategorias
+                                                    .length,
+                                                loop: true,
+                                                itemBuilder: (context, index) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      setState(() {
+                                                        showDetail = true;
 
-                                                                            // Cambia el color según tus preferencias
-                                                                          ))),
+                                                        loading = true;
+                                                        establecimiento =
+                                                            listaCategorias[i]
+                                                                    .subcategorias[
+                                                                index];
+                                                      });
+                                                      widget.hidesearchb();
+                                                    },
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                          color: Colors
+                                                              .grey.shade300,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10)),
+                                                      height: 15,
+                                                      child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Expanded(
+                                                              flex: 3,
+                                                              child: ClipRRect(
+                                                                child:
+                                                                    Image.asset(
+                                                                  listaCategorias[i]
+                                                                              .subcategorias[
+                                                                                  index]
+                                                                              .fotoCompraSubCategoria !=
+                                                                          ''
+                                                                      ? listaCategorias[
+                                                                              i]
+                                                                          .subcategorias[
+                                                                              index]
+                                                                          .fotoCompraSubCategoria
+                                                                      : "assets/no_image_otros.jpeg",
+                                                                  fit: BoxFit
+                                                                      .contain,
+                                                                  height: 50,
+                                                                  width:
+                                                                      80, //Todo tamaño de los iconos
                                                                 ),
                                                               ),
-                                                            ]),
-                                                      ),
-                                                    ); //return
-                                                  },
-                                                ))
-                                      ]),
-                                    ),
-                                  ],
-                                )),
-                          );
-                        })
-                    : GridView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: subcategoriasFilter.length,
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                            // height: 50,
-                            child: Stack(
-                              //mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Image.asset(
-                                  subcategoriasFilter[index]
-                                              .fotoCompraSubCategoria !=
-                                          ''
-                                      ? subcategoriasFilter[index]
-                                          .fotoCompraSubCategoria!
-                                      : "assets/no_image_otros.jpeg",
-                                  fit: BoxFit.fill,
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 200,
-                                childAspectRatio: 0.67,
-                                crossAxisSpacing: 5,
-                                mainAxisSpacing: 5),
-                      ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 3,
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .all(
+                                                                        10.0), // Todo Espaciado entre la imagen y el texto
+                                                                child: Center(
+                                                                    child: Text(
+                                                                        textAlign:
+                                                                            TextAlign
+                                                                                .center,
+                                                                        /*  "Descripción de beneficios" */ listaCategorias[i]
+                                                                            .subcategorias[
+                                                                                index]
+                                                                            .descripcion_completa_ben, // Asegúrate de que este campo exista
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              12,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              223,
+                                                                              101,
+                                                                              101,
+                                                                              101), // Todo color de texto
+
+                                                                          // Cambia el color según tus preferencias
+                                                                        ))),
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
+                                                  ); //return
+                                                },
+                                              ))
+                                    ]),
+                                  ),
+                                ],
+                              )),
+                        );
+                      })
+                  : GridView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: subcategoriasFilter.length,
+                      itemBuilder: (context, i) {
+                        return SizedBox(
+                          // height: 50,
+                          child: Stack(
+                            //mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.asset(
+                                subcategoriasFilter[i].fotoCompraSubCategoria !=
+                                        ''
+                                    ? subcategoriasFilter[i]
+                                        .fotoCompraSubCategoria!
+                                    : "assets/no_image_otros.jpeg",
+                                fit: BoxFit.fill,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 200,
+                              childAspectRatio: 0.67,
+                              crossAxisSpacing: 5,
+                              mainAxisSpacing: 5),
+                    ),
+        ),
+        SizedBox(height: 15)
+      ],
+    );
+  }
+
+  Widget detallesbeneficios({required SubCategoriaModelo establecimiento}) {
+    return SingleChildScrollView(
+        child: Container(
+            color: Colors.white,
+            child: Column(children: [
+              Container(
+                alignment: Alignment.centerLeft,
+                width: double.infinity,
+                height: 30,
+                child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showDetail = false;
+                        detallesbeneficios(establecimiento: establecimiento!);
+                      });
+                    },
+                    icon: Icon(Icons.arrow_back)),
               ),
-              SizedBox(height: 15)
-            ],
-          );
+              SizedBox(height: 35),
+              Image.asset(
+                establecimiento.fotoCompraSubCategoria,
+                fit: BoxFit.contain,
+                width: 280,
+                height: 150,
+              ),
+              SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Text(establecimiento.descripcion_completa_ben,
+                    style: TextStyle(color: Colors.black, fontSize: 16)),
+              )
+            ])));
   }
 
   Widget builderLoadingData() {
@@ -406,13 +464,12 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
     if (searchText.isEmpty) {
       return subcategoriasFilter = backupSubCat;
     } else {
-      setState(() {
-        subcategoriasFilter = backupSubCat
-            .where((element) => element.nombreCompraSubCategoria!
-                .toLowerCase()
-                .contains(searchText.toLowerCase()))
-            .toList();
-      });
+      subcategoriasFilter = backupSubCat
+          .where((element) => element.nombreCompraSubCategoria!
+              .toLowerCase()
+              .contains(searchText.toLowerCase()))
+          .toList();
+
       debugPrint("LONGITUD SEARCH: ${subcategoriasFilter.length}");
       return subcategoriasFilter;
     }
