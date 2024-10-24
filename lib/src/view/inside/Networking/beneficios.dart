@@ -1,12 +1,16 @@
-import 'package:app_socios/src/models/establecimiento_model.dart';
-import 'package:app_socios/src/models/usuario/empresa_model.dart';
+import 'package:app_socios/src/models/networkingModel/establecimiento_model.dart';
+import 'package:app_socios/src/models/networkingModel/empresa_model.dart';
 import 'package:app_socios/src/view/inside/Home/home_screen.dart';
 import 'package:app_socios/src/view/inside/Networking/data_list_estab.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:app_socios/utils/flushBarGlobal.dart';
 import 'package:app_socios/utils/textFields/input_text_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
-
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../../../utils/list/lista-socios.dart';
 import 'package:card_loading/card_loading.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +35,14 @@ class Beneficios_esta extends StatefulWidget {
 
 class _Beneficios_estaState extends State<Beneficios_esta> {
   bool loading = false;
-  List<SubCategoriaModelo> subcategoriasFilter = [];
-  List<SubCategoriaModelo> backupSubCat = [];
+  List<EstablecimientoModel> subcategoriasFilter = [];
+  List<EstablecimientoModel> backupSubCat = [];
+
+  double? longitude;
+  double? latitude;
 
   bool showDetail = false;
-  SubCategoriaModelo? establecimiento;
+  EstablecimientoModel? establecimiento;
 
   final _searchController = TextEditingController();
   String searchText = "";
@@ -200,7 +207,33 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
                                                 loop: true,
                                                 itemBuilder: (context, index) {
                                                   return GestureDetector(
-                                                    onTap: () {
+                                                    onTap: () async {
+                                                      //valido que el usuario tena permisosde ubicació
+                                                      if (await Permission
+                                                          .location
+                                                          .status
+                                                          .isGranted) {
+                                                        //complemento que me permite obtener mi ubicación actual
+                                                        obtenerUbicacion();
+                                                      } else {
+                                                        //sino tiene permiso, se lo pide
+                                                        var status =
+                                                            await Permission
+                                                                .location
+                                                                .request();
+
+                                                        if (status.isGranted) {
+                                                          obtenerUbicacion();
+                                                        } else {
+                                                          scaffoldMessenger(
+                                                              context,
+                                                              "Usuario rechazó el permiso de ubicación",
+                                                              Icon(Icons.error,
+                                                                  color: Colors
+                                                                      .red));
+                                                        }
+                                                      }
+
                                                       setState(() {
                                                         showDetail = true;
 
@@ -307,7 +340,7 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
                                 subcategoriasFilter[i].fotoCompraSubCategoria !=
                                         ''
                                     ? subcategoriasFilter[i]
-                                        .fotoCompraSubCategoria!
+                                        .fotoCompraSubCategoria
                                     : "assets/no_image_otros.jpeg",
                                 fit: BoxFit.fill,
                               ),
@@ -328,38 +361,108 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
     );
   }
 
-  Widget detallesbeneficios({required SubCategoriaModelo establecimiento}) {
+  void obtenerUbicacion() async {
+    final loc = await Geolocator.getCurrentPosition();
+    //seteo la latitud y longitud
+    setState(() {
+      latitude = loc.latitude;
+      longitude = loc.longitude;
+    });
+  }
+
+  Widget detallesbeneficios({required EstablecimientoModel establecimiento}) {
     return SingleChildScrollView(
-        child: Container(
-            color: Colors.white,
-            child: Column(children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                width: double.infinity,
-                height: 30,
-                child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        showDetail = false;
-                        detallesbeneficios(establecimiento: establecimiento!);
-                      });
-                    },
-                    icon: Icon(Icons.arrow_back)),
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              width: double.infinity,
+              height: 30,
+              child: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      showDetail = false;
+                    });
+                  },
+                  icon: Icon(Icons.arrow_back)),
+            ),
+            SizedBox(height: 25),
+            Image.asset(
+              establecimiento.fotoCompraSubCategoria,
+              fit: BoxFit.contain,
+              width: 280,
+              height: 105,
+            ),
+            //SizedBox(height: 1),
+            Padding(
+              padding: const EdgeInsets.all(25.5),
+              child: Text(establecimiento.descripcionesta,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(color: Colors.black, fontSize: 15)),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(25),
+              child: Text(establecimiento.descripcion_completa_ben,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ),
+
+            Container(
+              // Widget del mapa
+              height: 230, // Ajusta la altura según sea necesario
+              width: double.infinity,
+
+              child: GoogleMap(
+                mapType: MapType.satellite,
+                mapToolbarEnabled: false,
+                zoomControlsEnabled: true,
+                zoomGesturesEnabled: false,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(establecimiento.sucursales[0].latitud,
+                      establecimiento.sucursales[0].longitud),
+                  zoom: 30, // Ajusta el nivel de zoom según sea necesario
+                ),
+                markers: {
+                  if (establecimiento.sucursales.isNotEmpty)
+                    for (var sucursal in establecimiento.sucursales)
+                      Marker(
+                        //
+                        // icon: BitmapDescriptor.defaultMarkerWithHue(1),
+                        markerId: MarkerId(sucursal.nsucursal),
+                        position: LatLng(sucursal.latitud, sucursal.longitud),
+                        infoWindow: InfoWindow(
+                          title: 'Ubicación',
+                          snippet:
+                              sucursal.nsucursal, // Reemplaza con el nombre
+                        ),
+                      )
+                  else if (latitude != null && longitude != null)
+                    Marker(
+                      // icon: BitmapDescriptor.defaultMarkerWithHue(1),
+                      markerId: MarkerId('Mi ubicación'),
+                      position: LatLng(latitude!, longitude!),
+                      infoWindow: InfoWindow(
+                        title: 'Ubicación',
+                        snippet: establecimiento
+                            .nombreCompraSubCategoria, // Reemplaza con el nombre
+                      ),
+                    ),
+                },
               ),
-              SizedBox(height: 35),
-              Image.asset(
-                establecimiento.fotoCompraSubCategoria,
-                fit: BoxFit.contain,
-                width: 280,
-                height: 150,
-              ),
-              SizedBox(height: 5),
-              Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Text(establecimiento.descripcion_completa_ben,
-                    style: TextStyle(color: Colors.black, fontSize: 16)),
-              )
-            ])));
+            ),
+
+            SizedBox(height: 20), // Espacio adicional si lo deseas
+          ],
+        ),
+      ),
+    );
   }
 
   Widget builderLoadingData() {
@@ -460,12 +563,12 @@ class _Beneficios_estaState extends State<Beneficios_esta> {
     );
   }
 
-  List<SubCategoriaModelo> buildSearch() {
+  List<EstablecimientoModel> buildSearch() {
     if (searchText.isEmpty) {
       return subcategoriasFilter = backupSubCat;
     } else {
       subcategoriasFilter = backupSubCat
-          .where((element) => element.nombreCompraSubCategoria!
+          .where((element) => element.nombreCompraSubCategoria
               .toLowerCase()
               .contains(searchText.toLowerCase()))
           .toList();

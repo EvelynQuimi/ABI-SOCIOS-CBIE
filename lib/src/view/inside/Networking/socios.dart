@@ -1,5 +1,5 @@
 import 'package:animated_dropdown_search_codespark/animated_dropdown_search_codespark.dart';
-import 'package:app_socios/src/models/usuario/empresa_model.dart';
+import 'package:app_socios/src/models/networkingModel/empresa_model.dart';
 import 'package:app_socios/src/view/inside/Home/lateralMenu/drawer_menu.dart';
 import 'package:app_socios/src/view/inside/Home/screenlogin.dart';
 import 'package:app_socios/utils/app_bar.dart';

@@ -33,15 +33,18 @@ Widget tabBarBottom({required TabController controlador}) {
 
 Widget tabview(TabController controlador,
     {required GlobalKey<ScaffoldState> key}) {
-  return TabBarView(controller: controlador, children: [
-    CarruselPost(
-      sckey: key,
-    ), //publicaciones de usuarios
-    TabBarNetworking(
-      sckey: key,
-    ), //socios y beneficios
-    Eventos(sckey: key), //Eventos y agenda
-    B_Emergencia(sckey: key),
-    Tarjeta_v(sckey: key),
-  ]);
+  return TabBarView(
+      physics: NeverScrollableScrollPhysics(),
+      controller: controlador,
+      children: [
+        CarruselPost(
+          sckey: key,
+        ), //publicaciones de usuarios
+        TabBarNetworking(
+          sckey: key,
+        ), //socios y beneficios
+        Eventos(sckey: key), //Eventos y agenda
+        B_Emergencia(sckey: key),
+        Tarjeta_v(sckey: key),
+      ]);
 }

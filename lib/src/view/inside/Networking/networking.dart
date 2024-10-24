@@ -101,20 +101,23 @@ class _TabBarNetworkingState extends State<TabBarNetworking>
                 ],
               ),
               Expanded(
-                child: TabBarView(controller: _tabController, children: [
-                  Socios(
-                    hide: hide,
-                    show: show,
-                    hidesearchb: hidesearchb,
-                    showsearch: showsearch,
-                  ),
-                  Beneficios_esta(
-                    hide: hide,
-                    show: show,
-                    hidesearchb: hidesearchb,
-                    showsearch: showsearch,
-                  ),
-                ]),
+                child: TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: _tabController,
+                    children: [
+                      Socios(
+                        hide: hide,
+                        show: show,
+                        hidesearchb: hidesearchb,
+                        showsearch: showsearch,
+                      ),
+                      Beneficios_esta(
+                        hide: hide,
+                        show: show,
+                        hidesearchb: hidesearchb,
+                        showsearch: showsearch,
+                      ),
+                    ]),
               )
             ])));
   }

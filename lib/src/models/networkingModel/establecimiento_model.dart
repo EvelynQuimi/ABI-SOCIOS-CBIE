@@ -1,9 +1,11 @@
+import 'package:app_socios/src/models/networkingModel/sucursales_model.dart';
+
 class CategoriasModelo {
   int? idCompraCategoria;
   String? nombreCompraCategoria;
   String? fotoCategoria;
 
-  List<SubCategoriaModelo> subcategorias = [];
+  List<EstablecimientoModel> subcategorias = [];
 
   CategoriasModelo({
     this.fotoCategoria,
@@ -22,7 +24,7 @@ class CategoriasModelo {
   }
 }
 
-class SubCategoriaModelo {
+class EstablecimientoModel {
   int? idCompraSubCategoria;
   String nombreCompraSubCategoria;
   String fotoCompraSubCategoria;
@@ -31,20 +33,22 @@ class SubCategoriaModelo {
   String latitud;
   String longitud;
   String descripcionesta;
+  List<SucursalesModel> sucursales;
+  
 
-  SubCategoriaModelo({
-    required this.fotoCompraSubCategoria,
-    this.idCategoria,
-    this.idCompraSubCategoria,
-    required this.nombreCompraSubCategoria,
-    required this.descripcion_completa_ben,
-    required this.longitud,
-    required this.latitud,
-    required this.descripcionesta,
-  });
+  EstablecimientoModel(
+      {required this.fotoCompraSubCategoria,
+      this.idCategoria,
+      this.idCompraSubCategoria,
+      required this.nombreCompraSubCategoria,
+      required this.descripcion_completa_ben,
+      required this.longitud,
+      required this.latitud,
+      required this.descripcionesta,
+      required this.sucursales});
 
-  factory SubCategoriaModelo.fromJson(Map<String, dynamic> json) {
-    return SubCategoriaModelo(
+  /*  factory EstablecimientoModel.fromJson(Map<String, dynamic> json) {
+    return EstablecimientoModel(
       fotoCompraSubCategoria: json["fotoCompraSubCategoria"],
       idCategoria: json["idCategoria"],
       idCompraSubCategoria: json["idCompraSubCategoria"],
@@ -54,5 +58,5 @@ class SubCategoriaModelo {
       longitud: json["longitud"],
       descripcionesta: json["descripcionesta"],
     );
-  }
+  } */
 }

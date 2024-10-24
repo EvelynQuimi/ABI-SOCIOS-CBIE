@@ -1,4 +1,4 @@
-import 'package:app_socios/src/models/usuario/empresa_model.dart';
+import 'package:app_socios/src/models/networkingModel/empresa_model.dart';
 import 'package:app_socios/src/models/usuario/redsocial_model.dart';
 import 'package:app_socios/src/view/inside/Home/home_screen.dart';
 import 'package:app_socios/utils/header_container.dart';
